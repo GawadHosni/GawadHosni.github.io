@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسة جواد حسني الرسمية لغات</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        body { 
+            font-family: 'Tajawal', sans-serif; 
+            direction: rtl; 
+            text-align: center; 
+            background-color: #004d99; 
+            margin: 0; 
+            color: #222222; 
+        }
+        header { 
+            background: linear-gradient(135deg, #004080, #0066cc); 
+            color: white; 
+            padding: 15px; 
+            font-size: 1.2em; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+        }
+        header img { 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 15%; 
+            border: 3px solid white; 
+        }
+        nav { 
+            background: #0074D9; 
+            padding: 10px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+        nav a { 
+            margin: 0 10px; 
+            text-decoration: none; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 0.9em; 
+            transition: 0.3s; 
+            padding: 5px 10px; 
+            border-radius: 5px; 
+        }
+        nav a:hover { 
+            background: rgba(255, 255, 255, 0.2); 
+            color: #FFD700; 
+        }
+        section { 
+            background: white; 
+            margin: 15px auto; 
+            padding: 15px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+            width: 90%; 
+            transition: 0.5s; 
+            opacity: 0; 
+            transform: translateY(20px); 
+            animation: fadeInUp 0.5s ease-out forwards; 
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        section:hover { 
+            transform: scale(1.02); 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+        }
+        .staff-box, .news-box, .curriculum-box, .admission-box, .alumni-box, .fees-box, .gallery-box, .competitions-box { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 10px; 
+        }
+        .staff-member, .news-item, .curriculum-item, .admission-item, .alumni-item, .fees-item, .gallery-item, .competition-item { 
+            background: #f9f9f9; 
+            padding: 10px; 
+            border-radius: 10px; 
+            width: 100%; 
+            max-width: 200px; 
+            text-align: center; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            transition: 0.3s; 
+        }
+        .staff-member:hover, .news-item:hover, .curriculum-item:hover, .admission-item:hover, .alumni-item:hover, .fees-item:hover, .gallery-item:hover, .competition-item:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+        }
+        .staff-member img, .news-item img, .curriculum-item img, .admission-item img, .alumni-item img, .fees-item img, .gallery-item img, .competition-item img { 
+            width: 100%; 
+            border-radius: 10px; 
+        }
+        footer { 
+            background: #004080; 
+            color: white; 
+            padding: 10px; 
+            font-size: 0.9em; 
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1); 
+        }
+        button { 
+            background: #FFD700; 
+            border: none; 
+            padding: 8px 15px; 
+            font-size: 0.9em; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            border-radius: 5px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+        }
+        button:hover { 
+            background: #FFA500; 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1em;
+                padding: 10px;
+            }
+            header img {
+                width: 50px;
+                height: 50px;
+            }
+            nav {
+                padding: 5px;
+            }
+            nav a {
+                margin: 0 5px;
+                font-size: 0.8em;
+                padding: 5px 8px;
+            }
+            section {
+                width: 95%;
+                padding: 10px;
+            }
+            .staff-member, .news-item, .curriculum-item, .admission-item, .alumni-item, .fees-item, .gallery-item, .competition-item {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+    <script>
+        // دالة للتمرير السلس إلى القسم المحدد
+        function smoothScroll(targetId) {
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop,
+                    behavior: 'smooth' // تمكين التمرير السلس
+                });
+            }
+        }
+
+        // منع الانتقال الفوري وإضافة التمرير السلس
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault(); // منع الانتقال الفوري
+                const targetId = this.getAttribute('href').substring(1); // الحصول على الـ ID من الرابط
+                smoothScroll(targetId); // التمرير السلس إلى القسم
+            });
+        });
+
+        // دالة للتواصل
+        function showMessage() {
+            alert("للتواصل اتصل بالرقم التالي : 01234567891");
+            alert("او تواصل عن طريق البريد الالكتروني التالي : example@gmail.com")
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="schoollogo.jpg" alt="شعار المدرسة">
+        <h1>مدرسة جواد حسني الرسمية لغات</h1>
+    </header>
+    <nav>
+        <a href="#about">من نحن ؟</a>
+        <a href="#staff">الموظفون</a>
+        <a href="#gallery">المعرض</a>
+        <a href="#competitions">المسابقات</a> <!-- قسم جديد -->
+        <a href="#students">المتفوقون</a>
+        <a href="#curriculum">التقييمات</a>
+        <a href="#admission">التسجيل</a>
+        <a href="#alumni">الخريجون</a>
+        <a href="#fees">الرسوم</a>
+        <a href="#contact">اتصل بنا</a>
+    </nav>
+    <section id="about">
+        <h2>عن المدرسة</h2>
+        <img src="schoollogo.jpg" alt="صورة المدرسة" width="20%">
+        <p>مدرسة جواد حسني الرسمية لغات تقع بجوار محطة مترو السودان، وتقدم تعليماً متميزاً بجودة عالية.</p>
+    </section>
+    <section id="staff">
+        <h2>الموظفون</h2>
+        <div class="staff-box">
+            <div class="staff-member">
+                <img src="teacher1.jpg" alt="ميس دينا">
+                <h3>ميس دينا</h3>
+                <p>مدرسة تكنولوجيا المعلومات و الاتصالات</p>
+            </div>
+            <div class="staff-member">
+                <img src="teacher1.jpg" alt="مستر ايمن">
+                <h3>مستر ايمن</h3>
+                <p>مدرس اللغة الانجليزية</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم معرض الصور والفيديوهات -->
+    <section id="gallery">
+        <h2>معرض الصور والفيديوهات</h2>
+        <div class="gallery-box">
+            <div class="gallery-item">
+                <img src="b.jpg" alt="صورة 1">
+                <h3>فعالية اليوم الرياضي</h3>
+                <p>صور من اليوم الرياضي السنوي للمدرسة.</p>
+            </div>
+            <div class="gallery-item">
+                <img src="d.jpg" alt="صورة 2">
+                <h3>حفل التخرج</h3>
+                <p>لحظات مميزة من حفل تخرج الطلاب.</p>
+                <button><a href="https://www.facebook.com/gawadhosniels/posts/pfbid02a9C9VfXWv5tqLdy3w7YSJtnjcbvDphvZu9cKN3VrBiAhJYQtYCYr5JsJvucgLzKjl?locale=ar_AR">لرؤية كل الصور</a></button>
+            </div>
+            <div class="gallery-item">
+                <img src="c.jpg" alt="صورة 3">
+                <h3>معرض العلوم</h3>
+                <p>صورة من داخل معمل العلوم الخاص بالمدرسة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المسابقات -->
+    <section id="competitions">
+        <h2>المسابقات</h2>
+        <div class="competitions-box">
+            <div class="competition-item">
+                <img src="cm.jpg" alt="مسابقة 1">
+                <h3>مسابقة القصة القصيرة</h3>
+                <p>شارك في مسابقة القصة القصيرة السنوية واربح جوائز قيمة.</p>
+                <button><a href="https://example.com/competition1">اشترك الآن</a></button>
+            </div>
+            <div class="competition-item">
+                <img src="cb.jpg" alt="مسابقة 2">
+                <h3>مسابقة الرسم</h3>
+                <p>أظهر موهبتك في الرسم واربح جوائز مذهلة.</p>
+                <button><a href="https://example.com/competition2">اشترك الآن</a></button>
+            </div>
+            <div class="competition-item">
+                <img src="ca.jpg" alt="مسابقة 3">
+                <h3>مسابقة القراءة</h3>
+                <p>شارك في مسابقة القراءة واربح جوائز عينية و مادية.</p>
+                <button><a href="https://example.com/competition3">اشترك الآن</a></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="students">
+        <h2>الطلاب المتفوقون</h2>
+        <p>يتم تكريم المتفوقين ونشر أسمائهم هنا.</p>
+        <img src="Students.jpg" style="border-radius: 15%; width: 50%;">
+    </section>
+
+    <!-- قسم المناهج الدراسية -->
+    <section id="curriculum">
+        <h2>التقييمات لكل الفصول</h2>
+        <div class="curriculum-box">
+            <div class="curriculum-item">
+                <h3>رابط لكل التقييمات لكل الفصول</h3>
+                <button style="border-radius: 25%;"><a href="https://elearnningcontent.blob.core.windows.net/elearnningcontent/content/2025/Classroom_and_home_assessments_and_performances/Classroom_and_home_assessments_and_performances.html">اضغط هنا</a></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم القبول والتسجيل -->
+    <section id="admission">
+        <h2>القبول والتسجيل</h2>
+        <div class="admission-box">
+            <div class="admission-item">
+                <h3>شروط القبول</h3>
+                <p>ان لا يوجد لديك سجل اجرامي</p>
+                <p>عدم وجود مشاكل سابقة في المدرسة القديمة</p>
+            </div>
+            <div class="admission-item">
+                <h3>المستندات المطلوبة</h3>
+                <p>شهادة ميلاد</p>
+                <P>شهادة طبية</P>
+            </div>
+            <div class="admission-item">
+                <h3>التقديم عن طريق الذهاب للمدرسة</h3>
+                <button><a href="https://www.mediafire.com/">اضغط هنا لتحميل ورقة التقديم</a></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخريجين -->
+    <section id="alumni">
+        <h2>الخريجون</h2>
+        <div class="alumni-box">
+            <div class="alumni-item">
+                <img src="doctor.jpg" alt="خريج 1">
+                <h3>الدكتور حسين عبدالله</h3>
+                <p>كان في المدرسة و كان طالب متفوق و ابوه متوفي و كان يجتهد و يسعي حتي وصل لثانوية عامة و حصل علي مجموع 95% و دخل كلية طب و اصبح دكتور في مستشفي القاهرة</p>
+            </div>
+            <div class="alumni-item">
+                <img src="enginner.jpg" alt="خريج 2">
+                <h3>المهندس احمد عويس</h3>
+                <p>كان في المدرسة و كان يجنهد و يسعي و كان مجتهد لدرجة انه اصبح من اوائل الثانوية العامة دفعة 2015 و دخل كلية الهندسة - جامعة القاهرة و اصبح مهندس معماري</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الرسوم والمصروفات -->
+    <section id="fees">
+        <h2>الرسوم والمصروفات</h2>
+        <div class="fees-box">
+            <div class="fees-item">
+                <h3>مرحلة رياض اطفال</h3>
+                <p>200 جنيه</p>
+            </div>
+            <div class="fees-item">
+                <h3>المرحلة الابتدائية</h3>
+                <p>300 جنيه</p>
+            </div>
+            <div class="fees-item">
+                <h3>المرحلة الإعدادية</h3>
+                <p>500 جنيه</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>اتصل بنا</h2>
+        <p>العنوان: بجوار محطة مترو السودان، الجيزة - مصر</p>
+        <p>رقم الهاتف: 0123456789</p>
+        <button onclick="showMessage()">اضغط هنا</button>
+    </section>
+    <footer>
+        <p>&copy; 2025 مدرسة جواد حسني الرسمية لغات</p>
+    </footer>
+</body>
+</html>
