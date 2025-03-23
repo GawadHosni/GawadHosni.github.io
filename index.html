@@ -82,13 +82,13 @@
             transform: scale(1.02); 
             box-shadow: 0 10px 50px rgb(9, 255, 0); 
         }
-        .staff-box, .news-box, .curriculum-box, .admission-box, .fees-box, .gallery-box, .competitions-box { 
+        .news-box, .curriculum-box, .admission-box, .fees-box, .gallery-box, .competitions-box { 
             display: flex; 
             flex-wrap: wrap; 
             justify-content: center; 
             gap: 10px; 
         }
-        .staff-member, .news-item, .curriculum-item, .admission-item, .fees-item, .gallery-item, .competition-item { 
+        .news-item, .curriculum-item, .admission-item, .fees-item, .gallery-item, .competition-item { 
             background: #f9f9f9; 
             padding: 10px; 
             border-radius: 10px; 
@@ -98,11 +98,11 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.747); 
             transition: 0.3s; 
         }
-        .staff-member:hover, .news-item:hover, .curriculum-item:hover, .admission-item:hover, .fees-item:hover, .gallery-item:hover, .competition-item:hover { 
+        .news-item:hover, .curriculum-item:hover, .admission-item:hover, .fees-item:hover, .gallery-item:hover, .competition-item:hover { 
             transform: translateY(-5px); 
             box-shadow: 0 6px 12px rgba(255, 1, 1, 0.842); 
         }
-        .staff-member img, .news-item img, .curriculum-item img, .admission-item img, .fees-item img, .gallery-item img, .competition-item img { 
+        .news-item img, .curriculum-item img, .admission-item img, .fees-item img, .gallery-item img, .competition-item img { 
             width: 70%; 
             border-radius: 30px; 
         }
@@ -183,7 +183,7 @@
                 width: 95%;
                 padding: 10px;
             }
-            .staff-member, .news-item, .curriculum-item, .admission-item, .fees-item, .gallery-item, .competition-item {
+            .news-item, .curriculum-item, .admission-item, .fees-item, .gallery-item, .competition-item {
                 width: 100%;
                 max-width: 100%;
             }
@@ -212,8 +212,8 @@
 
         // دالة للتواصل
         function showMessage() {
-            alert("للتواصل اتصل بالرقم التالي : 01234567891");
-            alert("او تواصل عن طريق البريد الالكتروني التالي : example@gmail.com");
+            alert("للتواصل اتصل بالرقم التالي : 0233133926");
+            alert("او تواصل عن طريق البريد الالكتروني التالي : gawaadhosniels@yahoo.com");
         }
 
         // زر العودة إلى الأعلى
@@ -246,7 +246,6 @@
     </header>
     <nav>
         <a href="#about">من نحن ؟</a>
-        <a href="#staff">الموظفون</a>
         <a href="#gallery">المعرض</a>
         <a href="#competitions">المسابقات</a>
         <a href="#news">الاخبار</a>
@@ -260,25 +259,8 @@
         <br>
         <h2>عن المدرسة</h2>
         <img src="schoollogo.jpg" alt="صورة المدرسة" width="20%">
-        <p>مدرسة جواد حسني الرسمية لغات تقع بجوار محطة مترو السودان، وتقدم تعليماً متميزاً بجودة عالية.</p>
+        <p>مدرسة الشهيد جواد حسني الرسمية للغات هي مدرسة أنشأت في عام 1992 و يوجد بها المراحل الثلاثة الرئيسية و هي: مرحلة رياض اطفال - المرحلة الابتدائية و المرحلة الاعدادية و و المدرسة توجد في شارع السودان بجانب محطة مترو السودان بالجيزة و المدرسة يقام بها العديد من الانشطة  و الفعاليات المميزة و المتنوعة من حيث العلمية و الرياضية و الثقافية و المدرسة مسماه علي اسم الشهيد البورسعيدي جواد حسني </p>
     </section>
-    <section id="staff">
-        <br>
-        <h2>الموظفون</h2>
-        <div class="staff-box">
-            <div class="staff-member">
-                <img src="teacher1.jpg" alt="ميس دينا">
-                <h3>ميس دينا</h3>
-                <p>مدرسة تكنولوجيا المعلومات و الاتصالات</p>
-            </div>
-            <div class="staff-member">
-                <img src="teacher1.jpg" alt="مستر ايمن">
-                <h3>مستر ايمن</h3>
-                <p>مدرس اللغة الانجليزية</p>
-            </div>
-        </div>
-    </section>
-
     <!-- قسم معرض الصور والفيديوهات -->
     <section id="gallery">
         <br>
@@ -296,7 +278,7 @@
                     <img src="d.jpg" alt="صورة 2">
                 </a>
                 <h3>حفل التخرج</h3>
-                <p>لحظات مميزة من حفل تخرج الطلاب.</p>
+                <p>لحظات مميزة من حفل تخرج الطلاب دفعة المنظومة الجديدة 2.0 سنة 2024 الصف السادس الابتدائي</p>
                 <a href="https://www.facebook.com/gawadhosniels/posts/pfbid02a9C9VfXWv5tqLdy3w7YSJtnjcbvDphvZu9cKN3VrBiAhJYQtYCYr5JsJvucgLzKjl?locale=ar_AR"><button>لرؤية كل الصور</button></a>
             </div>
             <div class="gallery-item">
@@ -398,8 +380,7 @@
         <div class="admission-box">
             <div class="admission-item">
                 <h3>شروط القبول</h3>
-                <p>ان لا يوجد لديك سجل اجرامي</p>
-                <p>عدم وجود مشاكل سابقة في المدرسة القديمة</p>
+                <a href="https://www.facebook.com/gawadhosniels/posts/pfbid0SQn3AjV4ThfuEHXRopd5zCHTCvp7azy9gme6VVwH5EgVLP9ivASiYLsREzvt2R4Yl?locale=ar_AR"><button>لمعرفة شروط القبول اضغط هنا</button></a>
             </div>
             <div class="admission-item">
                 <h3>المستندات المطلوبة</h3>
@@ -408,7 +389,10 @@
             </div>
             <div class="admission-item">
                 <h3>التقديم عن طريق الذهاب للمدرسة</h3>
-                <a href="https://www.mediafire.com/"><button>اضغط هنا لتحميل ورقة التقديم</button></a>
+            </div>
+            <div class="admission-item">
+                <h3>استمارة التقديم لرياض اطفال</h3>
+                <a href="https://www.gizaedu.net/Kindergarten/PrintApplication"><button>اضغط هنا لطباعة ورقة التقديم</button></a>
             </div>
         </div>
     </section>
@@ -436,7 +420,9 @@
     <section id="contact">
         <br>
         <h2>اتصل بنا</h2>
-        <p>العنوان: بجوار محطة مترو السودان، الجيزة - مصر</p>
+        <p>العنوان : 346 شارع السودان، عبد النعيم، إمبابة،، محافظة الجيزة</p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.827764414327!2d31.207034725591537!3d30.070471117339203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14584167e9ae5c03%3A0x2f72171546d30b24!2z2YXYr9ix2LPYqSDYrNmI2KfYryDYrdiz2YbZiiDYp9mE2KfYqNiq2K_Yp9im2YrYqSDYp9mE2YXYtNiq2LHZg9ip!5e0!3m2!1sar!2seg!4v1742766863987!5m2!1sar!2seg" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <br>
         <button onclick="showMessage()">اضغط هنا</button>
     </section>
 
@@ -445,6 +431,7 @@
 
     <footer>
         <p>&copy; 2025 مدرسة جواد حسني الرسمية لغات</p>
+        <a href="https://www.facebook.com/gawadhosniels/?locale=ar_AR"><img src="facebook.jpg" alt="facebook" style="width: 30px; height: 30px; border-radius: 10px;"></a>
     </footer>
 </body>
 </html>
