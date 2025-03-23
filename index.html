@@ -8,14 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Rakkas&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Marhey&display=swap');
-        .competition-item img {
-    cursor: pointer; /* تغيير شكل المؤشر عند التحويم على الصورة */
-    transition: transform 0.3s ease; /* إضافة تأثير تحويم */
-}
 
-.competition-item img:hover {
-    transform: scale(1.05); /* تكبير الصورة قليلاً عند التحويم */
-}
         body { 
             font-family: "Marhey", sans-serif; 
             direction: rtl; 
@@ -24,7 +17,7 @@
             margin: 0; 
             color: #222222; 
         }
-        p{
+        p {
             font-family: "Tajawal", sans-serif;
         }
         header { 
@@ -89,13 +82,13 @@
             transform: scale(1.02); 
             box-shadow: 0 10px 50px rgb(9, 255, 0); 
         }
-        .staff-box, .news-box, .curriculum-box, .admission-box, .alumni-box, .fees-box, .gallery-box, .competitions-box { 
+        .staff-box, .news-box, .curriculum-box, .admission-box, .fees-box, .gallery-box, .competitions-box { 
             display: flex; 
             flex-wrap: wrap; 
             justify-content: center; 
             gap: 10px; 
         }
-        .staff-member, .news-item, .curriculum-item, .admission-item, .alumni-item, .fees-item, .gallery-item, .competition-item { 
+        .staff-member, .news-item, .curriculum-item, .admission-item, .fees-item, .gallery-item, .competition-item { 
             background: #f9f9f9; 
             padding: 10px; 
             border-radius: 10px; 
@@ -105,11 +98,11 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.747); 
             transition: 0.3s; 
         }
-        .staff-member:hover, .news-item:hover, .curriculum-item:hover, .admission-item:hover, .alumni-item:hover, .fees-item:hover, .gallery-item:hover, .competition-item:hover { 
+        .staff-member:hover, .news-item:hover, .curriculum-item:hover, .admission-item:hover, .fees-item:hover, .gallery-item:hover, .competition-item:hover { 
             transform: translateY(-5px); 
             box-shadow: 0 6px 12px rgba(255, 1, 1, 0.842); 
         }
-        .staff-member img, .news-item img, .curriculum-item img, .admission-item img, .alumni-item img, .fees-item img, .gallery-item img, .competition-item img { 
+        .staff-member img, .news-item img, .curriculum-item img, .admission-item img, .fees-item img, .gallery-item img, .competition-item img { 
             width: 70%; 
             border-radius: 30px; 
         }
@@ -135,6 +128,39 @@
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); 
         }
 
+        /* قسم الأخبار الجديد */
+        .news-item {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* زر العودة إلى الأعلى */
+        #scrollToTop {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #FFD700;
+            color: #004080;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+        #scrollToTop:hover {
+            background: #FFA500;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             header {
@@ -157,7 +183,7 @@
                 width: 95%;
                 padding: 10px;
             }
-            .staff-member, .news-item, .curriculum-item, .admission-item, .alumni-item, .fees-item, .gallery-item, .competition-item {
+            .staff-member, .news-item, .curriculum-item, .admission-item, .fees-item, .gallery-item, .competition-item {
                 width: 100%;
                 max-width: 100%;
             }
@@ -170,7 +196,7 @@
             if (targetSection) {
                 window.scrollTo({
                     top: targetSection.offsetTop,
-                    behavior: 'smooth' // تمكين التمرير السلس
+                    behavior: 'smooth'
                 });
             }
         }
@@ -178,24 +204,40 @@
         // منع الانتقال الفوري وإضافة التمرير السلس
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', function (e) {
-                e.preventDefault(); // منع الانتقال الفوري
-                const targetId = this.getAttribute('href').substring(1); // الحصول على الـ ID من الرابط
-                smoothScroll(targetId); // التمرير السلس إلى القسم
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                smoothScroll(targetId);
             });
         });
 
         // دالة للتواصل
         function showMessage() {
             alert("للتواصل اتصل بالرقم التالي : 01234567891");
-            alert("او تواصل عن طريق البريد الالكتروني التالي : example@gmail.com")
+            alert("او تواصل عن طريق البريد الالكتروني التالي : example@gmail.com");
+        }
+
+        // زر العودة إلى الأعلى
+        window.onscroll = function() {
+            const scrollToTopButton = document.getElementById('scrollToTop');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopButton.style.display = 'block';
+            } else {
+                scrollToTopButton.style.display = 'none';
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     </script>
     <!-- Lightbox CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
-
-<!-- Lightbox JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-<link rel="website icon" href="schoollogo.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <link rel="website icon" href="schoollogo.jpg">
 </head>
 <body>
     <header>
@@ -206,11 +248,11 @@
         <a href="#about">من نحن ؟</a>
         <a href="#staff">الموظفون</a>
         <a href="#gallery">المعرض</a>
-        <a href="#competitions">المسابقات</a> <!-- قسم جديد -->
+        <a href="#competitions">المسابقات</a>
+        <a href="#news">الاخبار</a>
         <a href="#students">المتفوقون</a>
         <a href="#curriculum">التقييمات</a>
         <a href="#admission">التسجيل</a>
-        <a href="#alumni">الخريجون</a>
         <a href="#fees">الرسوم</a>
         <a href="#contact">اتصل بنا</a>
     </nav>
@@ -243,14 +285,14 @@
         <h2>معرض الصور والفيديوهات</h2>
         <div class="gallery-box">
             <div class="gallery-item">
-                <a href="b.jpg" data-lightbox="competitions" data-title="صورة 1">
+                <a href="b.jpg" data-lightbox="gallery" data-title="صورة 1">
                     <img src="b.jpg" alt="صورة 1">
                 </a>
                 <h3>فعالية اليوم الرياضي</h3>
                 <p>صور من اليوم الرياضي السنوي للمدرسة.</p>
             </div>
             <div class="gallery-item">
-                <a href="d.jpg" data-lightbox="competitions" data-title="صورة 2">
+                <a href="d.jpg" data-lightbox="gallery" data-title="صورة 2">
                     <img src="d.jpg" alt="صورة 2">
                 </a>
                 <h3>حفل التخرج</h3>
@@ -258,7 +300,7 @@
                 <a href="https://www.facebook.com/gawadhosniels/posts/pfbid02a9C9VfXWv5tqLdy3w7YSJtnjcbvDphvZu9cKN3VrBiAhJYQtYCYr5JsJvucgLzKjl?locale=ar_AR"><button>لرؤية كل الصور</button></a>
             </div>
             <div class="gallery-item">
-                <a href="c.jpg" data-lightbox="competitions" data-title="صورة 3">
+                <a href="c.jpg" data-lightbox="gallery" data-title="صورة 3">
                     <img src="c.jpg" alt="صورة 3">
                 </a>
                 <h3>معرض العلوم</h3>
@@ -298,6 +340,38 @@
             </div>
         </div>
     </section>
+
+    <!-- قسم الأخبار الجديد -->
+    <section id="news">
+        <br>
+        <h2>الأخبار</h2>
+        <div class="news-box">
+            <div class="news-item">
+                <h4>2025-3-23</h4>
+                <h3>تكريم الطلبة المتفوقين</h3>
+                <p>تم تكريم الطلبة المتفوقين يوم الاحد علي مجهوداتهم الاذاعية في اذاعة المدرسة بالطابور الصباحي و نشكرهم علي جهدهم و سيكون موجودين في قسم الطلاب المتفوقين</p>
+                <a href="#"><button>اقرأ المزيد</button></a>
+            </div>
+            <div class="news-item">
+                <h4>2025-3-21</h4>
+                <h3>تهنئة عيد الام من ادارة المدرسة</h3>
+                <p>اسرة المدرسة تهنئ كل ام  وترسل لها باقة ورد عرفانا منا بدورها الأصيل فى بناء الطفل وتربية الاجيال 🌹🌹🌹
+كل عام وكل ام بخير وسعادة وصحة ، الحياة هى امى . 
+ اللهم بارك فى امهاتنا وارحم من فارقنا . 
+قبل يد امك يوميا واطلب منها تدعيلك وتذكر ان الجنة
+تحت أقدام الأمهات.</p>
+                <a href="#"><button>اقرأ المزيد</button></a>
+            </div>
+            <div class="news-item">
+                <h4>2025-3-15</h4>
+                <h3>التشديد علي عدم الغياب</h3>
+                <p>شددت الاستاذة سيماء مديرة المدرسة علي عدم الغياب في رمضان و الاستمرار في الحضور و كانت منزعجة من الغياب المستمر من الطلبة</p>
+                <a href="#"><button>اقرأ المزيد</button></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الطلاب المتفوقون -->
     <section id="students">
         <br>
         <h2>الطلاب المتفوقون</h2>
@@ -338,25 +412,6 @@
             </div>
         </div>
     </section>
-
-    <!-- قسم الخريجين -->
-    <section id="alumni">
-        <br>
-        <h2>الخريجون</h2>
-        <div class="alumni-box">
-            <div class="alumni-item">
-                <img src="doctor.jpg" alt="خريج 1">
-                <h3>الدكتور حسين عبدالله</h3>
-                <p>كان في المدرسة و كان طالب متفوق و ابوه متوفي و كان يجتهد و يسعي حتي وصل لثانوية عامة و حصل علي مجموع 95% و دخل كلية طب و اصبح دكتور في مستشفي القاهرة</p>
-            </div>
-            <div class="alumni-item">
-                <img src="enginner.jpg" alt="خريج 2">
-                <h3>المهندس احمد عويس</h3>
-                <p>كان في المدرسة و كان يجنهد و يسعي و كان مجتهد لدرجة انه اصبح من اوائل الثانوية العامة دفعة 2015 و دخل كلية الهندسة - جامعة القاهرة و اصبح مهندس معماري</p>
-            </div>
-        </div>
-    </section>
-
     <!-- قسم الرسوم والمصروفات -->
     <section id="fees">
         <br>
@@ -377,12 +432,17 @@
         </div>
     </section>
 
+    <!-- قسم اتصل بنا -->
     <section id="contact">
         <br>
         <h2>اتصل بنا</h2>
         <p>العنوان: بجوار محطة مترو السودان، الجيزة - مصر</p>
         <button onclick="showMessage()">اضغط هنا</button>
     </section>
+
+    <!-- زر العودة إلى الأعلى -->
+    <button id="scrollToTop" onclick="scrollToTop()">↑</button>
+
     <footer>
         <p>&copy; 2025 مدرسة جواد حسني الرسمية لغات</p>
     </footer>
