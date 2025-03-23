@@ -6,19 +6,33 @@
     <title>مدرسة جواد حسني الرسمية لغات</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rakkas&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Marhey&display=swap');
+        .competition-item img {
+    cursor: pointer; /* تغيير شكل المؤشر عند التحويم على الصورة */
+    transition: transform 0.3s ease; /* إضافة تأثير تحويم */
+}
+
+.competition-item img:hover {
+    transform: scale(1.05); /* تكبير الصورة قليلاً عند التحويم */
+}
         body { 
-            font-family: 'Tajawal', sans-serif; 
+            font-family: "Marhey", sans-serif; 
             direction: rtl; 
             text-align: center; 
-            background-color: #004d99; 
+            background-color: #4682f0; 
             margin: 0; 
             color: #222222; 
+        }
+        p{
+            font-family: "Tajawal", sans-serif;
         }
         header { 
             background: linear-gradient(135deg, #004080, #0066cc); 
             color: white; 
             padding: 15px; 
-            font-size: 1.2em; 
+            font-size: 1.5em; 
+            font-family: "Rakkas", serif;
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -26,10 +40,10 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
         }
         header img { 
-            width: 60px; 
-            height: 60px; 
+            width: 100px; 
+            height: 100px; 
             border-radius: 15%; 
-            border: 3px solid white; 
+            border: 3px solid rgb(131, 138, 248); 
         }
         nav { 
             background: #0074D9; 
@@ -73,7 +87,7 @@
         }
         section:hover { 
             transform: scale(1.02); 
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0 10px 50px rgb(9, 255, 0); 
         }
         .staff-box, .news-box, .curriculum-box, .admission-box, .alumni-box, .fees-box, .gallery-box, .competitions-box { 
             display: flex; 
@@ -88,16 +102,16 @@
             width: 100%; 
             max-width: 200px; 
             text-align: center; 
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.747); 
             transition: 0.3s; 
         }
         .staff-member:hover, .news-item:hover, .curriculum-item:hover, .admission-item:hover, .alumni-item:hover, .fees-item:hover, .gallery-item:hover, .competition-item:hover { 
             transform: translateY(-5px); 
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0 6px 12px rgba(255, 1, 1, 0.842); 
         }
         .staff-member img, .news-item img, .curriculum-item img, .admission-item img, .alumni-item img, .fees-item img, .gallery-item img, .competition-item img { 
-            width: 100%; 
-            border-radius: 10px; 
+            width: 70%; 
+            border-radius: 30px; 
         }
         footer { 
             background: #004080; 
@@ -110,7 +124,7 @@
             background: #FFD700; 
             border: none; 
             padding: 8px 15px; 
-            font-size: 0.9em; 
+            font-size: 1em; 
             cursor: pointer; 
             transition: 0.3s; 
             border-radius: 5px; 
@@ -118,7 +132,7 @@
         }
         button:hover { 
             background: #FFA500; 
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); 
         }
 
         /* Responsive Design */
@@ -176,6 +190,12 @@
             alert("او تواصل عن طريق البريد الالكتروني التالي : example@gmail.com")
         }
     </script>
+    <!-- Lightbox CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+
+<!-- Lightbox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+<link rel="website icon" href="schoollogo.jpg">
 </head>
 <body>
     <header>
@@ -195,11 +215,13 @@
         <a href="#contact">اتصل بنا</a>
     </nav>
     <section id="about">
+        <br>
         <h2>عن المدرسة</h2>
         <img src="schoollogo.jpg" alt="صورة المدرسة" width="20%">
         <p>مدرسة جواد حسني الرسمية لغات تقع بجوار محطة مترو السودان، وتقدم تعليماً متميزاً بجودة عالية.</p>
     </section>
     <section id="staff">
+        <br>
         <h2>الموظفون</h2>
         <div class="staff-box">
             <div class="staff-member">
@@ -217,21 +239,28 @@
 
     <!-- قسم معرض الصور والفيديوهات -->
     <section id="gallery">
+        <br>
         <h2>معرض الصور والفيديوهات</h2>
         <div class="gallery-box">
             <div class="gallery-item">
-                <img src="b.jpg" alt="صورة 1">
+                <a href="b.jpg" data-lightbox="competitions" data-title="صورة 1">
+                    <img src="b.jpg" alt="صورة 1">
+                </a>
                 <h3>فعالية اليوم الرياضي</h3>
                 <p>صور من اليوم الرياضي السنوي للمدرسة.</p>
             </div>
             <div class="gallery-item">
-                <img src="d.jpg" alt="صورة 2">
+                <a href="d.jpg" data-lightbox="competitions" data-title="صورة 2">
+                    <img src="d.jpg" alt="صورة 2">
+                </a>
                 <h3>حفل التخرج</h3>
                 <p>لحظات مميزة من حفل تخرج الطلاب.</p>
-                <button><a href="https://www.facebook.com/gawadhosniels/posts/pfbid02a9C9VfXWv5tqLdy3w7YSJtnjcbvDphvZu9cKN3VrBiAhJYQtYCYr5JsJvucgLzKjl?locale=ar_AR">لرؤية كل الصور</a></button>
+                <a href="https://www.facebook.com/gawadhosniels/posts/pfbid02a9C9VfXWv5tqLdy3w7YSJtnjcbvDphvZu9cKN3VrBiAhJYQtYCYr5JsJvucgLzKjl?locale=ar_AR"><button>لرؤية كل الصور</button></a>
             </div>
             <div class="gallery-item">
-                <img src="c.jpg" alt="صورة 3">
+                <a href="c.jpg" data-lightbox="competitions" data-title="صورة 3">
+                    <img src="c.jpg" alt="صورة 3">
+                </a>
                 <h3>معرض العلوم</h3>
                 <p>صورة من داخل معمل العلوم الخاص بالمدرسة</p>
             </div>
@@ -240,48 +269,57 @@
 
     <!-- قسم المسابقات -->
     <section id="competitions">
+        <br>
         <h2>المسابقات</h2>
         <div class="competitions-box">
             <div class="competition-item">
-                <img src="cm.jpg" alt="مسابقة 1">
-                <h3>مسابقة القصة القصيرة</h3>
-                <p>شارك في مسابقة القصة القصيرة السنوية واربح جوائز قيمة.</p>
-                <button><a href="https://example.com/competition1">اشترك الآن</a></button>
+                <a href="cm.jpg" data-lightbox="competitions" data-title="مسابقة القراءة">
+                    <img src="cm.jpg" alt="مسابقة 1">
+                </a>
+                <h3>مسابقة القراءة</h3>
+                <p>شارك في مسابقة القراءة السنوية واربح جوائز قيمة.</p>
+                <a href="https://example.com/competition1"><button>اشترك الآن</button></a>
             </div>
             <div class="competition-item">
-                <img src="cb.jpg" alt="مسابقة 2">
+                <a href="cb.jpg" data-lightbox="competitions" data-title="مسابقة الرسم">
+                    <img src="cb.jpg" alt="مسابقة 2">
+                </a>
                 <h3>مسابقة الرسم</h3>
                 <p>أظهر موهبتك في الرسم واربح جوائز مذهلة.</p>
-                <button><a href="https://example.com/competition2">اشترك الآن</a></button>
+                <a href="https://example.com/competition1"><button>اشترك الآن</button></a>
             </div>
             <div class="competition-item">
-                <img src="ca.jpg" alt="مسابقة 3">
-                <h3>مسابقة القراءة</h3>
-                <p>شارك في مسابقة القراءة واربح جوائز عينية و مادية.</p>
-                <button><a href="https://example.com/competition3">اشترك الآن</a></button>
+                <a href="ca.jpg" data-lightbox="competitions" data-title="مسابقة العلوم">
+                    <img src="ca.jpg" alt="مسابقة 3">
+                </a>
+                <h3>مسابقة القصة القصيرة</h3>
+                <p>شارك في مسابقة القصة القصيرة واربح جوائز عينية.</p>
+                <a href="https://example.com/competition1"><button>اشترك الآن</button></a>
             </div>
         </div>
     </section>
-
     <section id="students">
+        <br>
         <h2>الطلاب المتفوقون</h2>
         <p>يتم تكريم المتفوقين ونشر أسمائهم هنا.</p>
-        <img src="Students.jpg" style="border-radius: 15%; width: 50%;">
+        <img src="Students.jpg" style="border-radius: 15%; width: 70%;">
     </section>
 
     <!-- قسم المناهج الدراسية -->
     <section id="curriculum">
-        <h2>التقييمات لكل الفصول</h2>
+        <br>
+        <h2>التقييمات</h2>
         <div class="curriculum-box">
             <div class="curriculum-item">
                 <h3>رابط لكل التقييمات لكل الفصول</h3>
-                <button style="border-radius: 25%;"><a href="https://elearnningcontent.blob.core.windows.net/elearnningcontent/content/2025/Classroom_and_home_assessments_and_performances/Classroom_and_home_assessments_and_performances.html">اضغط هنا</a></button>
+                <a href="https://elearnningcontent.blob.core.windows.net/elearnningcontent/content/2025/Classroom_and_home_assessments_and_performances/Classroom_and_home_assessments_and_performances.html"><button style="border-radius: 25%;">اضغط هنا</button></a>
             </div>
         </div>
     </section>
 
     <!-- قسم القبول والتسجيل -->
     <section id="admission">
+        <br>
         <h2>القبول والتسجيل</h2>
         <div class="admission-box">
             <div class="admission-item">
@@ -296,13 +334,14 @@
             </div>
             <div class="admission-item">
                 <h3>التقديم عن طريق الذهاب للمدرسة</h3>
-                <button><a href="https://www.mediafire.com/">اضغط هنا لتحميل ورقة التقديم</a></button>
+                <a href="https://www.mediafire.com/"><button>اضغط هنا لتحميل ورقة التقديم</button></a>
             </div>
         </div>
     </section>
 
     <!-- قسم الخريجين -->
     <section id="alumni">
+        <br>
         <h2>الخريجون</h2>
         <div class="alumni-box">
             <div class="alumni-item">
@@ -320,6 +359,7 @@
 
     <!-- قسم الرسوم والمصروفات -->
     <section id="fees">
+        <br>
         <h2>الرسوم والمصروفات</h2>
         <div class="fees-box">
             <div class="fees-item">
@@ -338,9 +378,9 @@
     </section>
 
     <section id="contact">
+        <br>
         <h2>اتصل بنا</h2>
         <p>العنوان: بجوار محطة مترو السودان، الجيزة - مصر</p>
-        <p>رقم الهاتف: 0123456789</p>
         <button onclick="showMessage()">اضغط هنا</button>
     </section>
     <footer>
