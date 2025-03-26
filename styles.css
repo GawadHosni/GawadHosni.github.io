@@ -572,7 +572,7 @@ section:nth-child(odd) {
     opacity: 1;
 }
 /* تحسينات القائمة المنسدلة */
-@media (max-width: 1080px) {
+@media (max-width: 768px) {
 .nav-container {
     background-color: var(--primary-color);
     width: 100%;
