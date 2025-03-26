@@ -1,23 +1,21 @@
-// أضف هذا في ملف script.js
+// إنشاء زر القائمة للجوال
 document.addEventListener('DOMContentLoaded', function() {
-    // إنشاء زر القائمة للجوال
     const menuToggle = document.createElement('button');
-    menuToggle.innerHTML = '<i class="fas fa-bars"></i> القائمة';
+    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
     menuToggle.className = 'mobile-menu-toggle';
-    menuToggle.setAttribute('aria-label', 'فتح القائمة');
+    menuToggle.setAttribute('aria-label', 'قائمة التنقل');
     
-    // إضافة زر القائمة قبل شريط التنقل
     const nav = document.querySelector('nav');
     nav.parentNode.insertBefore(menuToggle, nav);
     
-    // التحكم في عرض القائمة
     menuToggle.addEventListener('click', function() {
         const navContainer = document.querySelector('.nav-container');
         navContainer.classList.toggle('show');
         this.innerHTML = navContainer.classList.contains('show') ? 
-            '<i class="fas fa-times"></i> إغلاق' : 
-            '<i class="fas fa-bars"></i> القائمة';
+            '<i class="fas fa-times"></i>' : 
+            '<i class="fas fa-bars"></i>';
     });
+});
     
     // إظهار زر العودة للأعلى عند التمرير
     const backToTop = document.querySelector('.back-to-top');
