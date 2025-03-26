@@ -1,11 +1,15 @@
-const CACHE_NAME = 'gawad-hosni-v1';
+// في sw.js:
 const urlsToCache = [
-  '/',
-  '/styles.css',
-  '/script.js',
-  '/schoollogo.jpg',
-  // أضف هنا الملفات الأخرى التي تريد تخزينها
-];
+    '/',
+    '/index.html',
+    '/styles.css',
+    '/script.js',
+    '/schoollogo.jpg',
+    '/Students.jpg',
+    '/b.jpg',
+    '/c.jpg',
+    '/d.jpg'
+  ];
 
 self.addEventListener('install', event => {
   event.waitUntil(
