@@ -1,32 +1,34 @@
-// إنشاء زر القائمة للجوال
 document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.createElement('button');
-    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    menuToggle.className = 'mobile-menu-btn';
-    menuToggle.setAttribute('aria-label', 'قائمة التنقل');
+    // عناصر القائمة المنسدلة
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navContainer = document.querySelector('.nav-container');
     
-    const nav = document.querySelector('nav');
-    nav.parentNode.insertBefore(menuToggle, nav);
+    // تفعيل القائمة المنسدلة
+    if (menuBtn && navContainer) {
+        menuBtn.addEventListener('click', function() {
+            navContainer.classList.toggle('active');
+            const isOpen = navContainer.classList.contains('active');
+            
+            // تغيير الأيقونة
+            this.innerHTML = isOpen 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+            
+            // تحسين إمكانية الوصول
+            this.setAttribute('aria-expanded', isOpen);
+        });
+    }
     
-    menuToggle.addEventListener('click', function() {
-        const navContainer = document.querySelector('.nav-container');
-        navContainer.classList.toggle('show');
-        this.innerHTML = navContainer.classList.contains('show') ? 
-            '<i class="fas fa-times"></i>' : 
-            '<i class="fas fa-bars"></i>';
+    // إغلاق القائمة عند النقر على رابط
+    document.querySelectorAll('.nav-container a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navContainer.classList.contains('active')) {
+                navContainer.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                menuBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
     });
-});
-    
-    // إظهار زر العودة للأعلى عند التمرير
-    const backToTop = document.querySelector('.back-to-top');
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-            backToTop.classList.add('show');
-        } else {
-            backToTop.classList.remove('show');
-        }
-    });
-});
 // JavaScript لتحميل الصور بكسلاسة
 document.addEventListener("DOMContentLoaded", function() {
     const lazyImages = [].slice.call(document.querySelectorAll("img.lazy-load"));
