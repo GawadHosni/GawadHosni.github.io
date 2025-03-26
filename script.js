@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.createElement('button');
     menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    menuToggle.className = 'mobile-menu-toggle';
+    menuToggle.className = 'mobile-menu-btn';
     menuToggle.setAttribute('aria-label', 'قائمة التنقل');
     
     const nav = document.querySelector('nav');
