@@ -5,7 +5,6 @@ const urlsToCache = [
     '/styles.css',
     '/script.js',
     '/schoollogo.jpg',
-    '/Students.jpg',
     '/b.jpg',
     '/c.jpg',
     '/d.jpg'
