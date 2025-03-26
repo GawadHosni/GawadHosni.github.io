@@ -468,7 +468,7 @@ a, button, input, .btn {
     }
 }
 /* زر القائمة للجوال */
-.mobile-menu-toggle {
+.mobile-menu-btn {
     display: none;
     background: var(--primary-color);
     color: white;
@@ -482,7 +482,7 @@ a, button, input, .btn {
 }
 
 /* تصميم زر القائمة للجوال */
-.mobile-menu-toggle {
+.mobile-menu-btn {
     display: none;
     background: var(--primary-color);
     color: white;
@@ -499,7 +499,7 @@ a, button, input, .btn {
 }
 
 @media (max-width: 768px) {
-    .mobile-menu-toggle {
+    .mobile-menu-btn {
         display: block;
     }
     
