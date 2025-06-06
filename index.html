@@ -126,34 +126,98 @@
         </section>
         
         <!-- قسم الأخبار -->
-        <section id="news" class="fade-in">
-            <br>
-            <br>
-            <h2 class="section-title">أخبار المدرسة</h2>
-            
-            <div class="news-item">
-                <div class="news-date">2025-03-24</div>
-                <h3>وزير التربية والتعليم يصدر قرارا بمنح المدارس إجازة أسبوعا بمناسبة عيد الفطر المبارك</h3>
-                <p>أصدر السيد محمد عبد اللطيف وزير التربية والتعليم والتعليم الفني قرارا بمنح الطلاب في كافة المدارس على مستوى الجمهورية إجازة رسمية من...</p>
-                <a href="https://www.facebook.com/share/p/16JCUy6gYX/" class="btn">قراءة المزيد</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-date">2025-03-21</div>
-                <h3>احتفالية عيد الأم</h3>
-                <p>بمناسبة عيد الأم، نظمت المدرسة احتفالية خاصة عبرت فيها عن تقديرها لدور الأمهات في بناء الأجيال، وشارك الطلاب بتقديم فقرات فنية ومعايدات مؤثرة.</p>
-                <a href="https://www.facebook.com/share/p/19f8YZCMpL/" class="btn">قراءة المزيد</a>
-            </div>
-            
-            <div class="news-item">
-                <div class="news-date">2025-03-15</div>
-                <h3>وفاة والدة الاستاذة منال و زوج الاستاذة عطيات</h3>
-                <p>ببالغ الحزن والاسى تنعى اسرة المدرسة كل من ... 
-                    والدة الاستاذة / منال وهبة معلم خبير التربية البدنية بالمدرسة . 
-                    وزوج ا/ عطيات محمود كبير معلمى اللغة العربية بالمدرسة</p>
-                <a href="https://www.facebook.com/share/p/1Gx8CHY97q/" class="btn">قراءة المزيد</a>
-            </div>
-        </section>
+<section id="news" class="fade-in">
+  <br><br>
+  <h2 class="section-title">أخبار المدرسة</h2>
+
+  <!-- زر تحديث الأخبار -->
+  <button id="refresh-news-btn" class="refresh-news-btn">تحديث الأخبار
+  </button>
+  <br>
+  <br>
+  <div id="news-container"></div>
+</section>
+
+<script>
+  const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
+
+  // دالة بسيطة لتحليل سطر CSV (تدعم علامات الاقتباس)
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current.trim().replace(/^"|"$/g, ''));
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current.trim().replace(/^"|"$/g, ''));
+    return result;
+  }
+
+  function fetchNews() {
+    // إضافة cache-buster لمنع الكاش
+    const csvUrl = baseCsvUrl + '&cacheBuster=' + new Date().getTime();
+
+    fetch(csvUrl)
+      .then(response => response.text())
+      .then(text => {
+        const lines = text.trim().split('\n');
+        const container = document.getElementById('news-container');
+        container.innerHTML = '';
+
+        const newsItems = [];
+
+        // تجاهل رأس الجدول (الصف الأول)
+        for (let i = 1; i < lines.length; i++) {
+          const cols = parseCSVLine(lines[i]);
+
+          const date = cols[1] || '';
+          const title = cols[2] || '';
+          const description = cols[3] || '';
+          const link = cols[4] || '#';
+
+          newsItems.push({ date, title, description, link });
+        }
+
+        // ترتيب الأخبار من الأحدث للأقدم حسب التاريخ (تاريخ بصيغة قابلة للمقارنة)
+        newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // عرض الأخبار
+        newsItems.forEach(({ date, title, description, link }) => {
+          const newsItem = document.createElement('div');
+          newsItem.classList.add('news-item');
+          newsItem.innerHTML = `
+            <div class="news-date">${date}</div>
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
+          `;
+          container.appendChild(newsItem);
+        });
+      })
+      .catch(err => {
+        console.error('خطأ في تحميل الأخبار:', err);
+        document.getElementById('news-container').innerText = 'فشل في تحميل الأخبار.';
+      });
+  }
+
+  // تحميل الأخبار عند فتح الصفحة
+  fetchNews();
+
+  // ربط الزر بفنكشن التحديث
+  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
+</script>
+
+
+
+
         
         <!-- قسم المواعيد الهامة -->
         <section id="events" class="fade-in">

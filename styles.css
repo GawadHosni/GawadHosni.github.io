@@ -80,6 +80,7 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+    font-family: "Tajawal", sans-serif;
 }
 
 nav a {
@@ -612,3 +613,28 @@ header, nav {
     visibility: visible !important;
 }
 }
+
+
+  .refresh-news-btn{
+    background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
+    border: none;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.6rem 1.8rem;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+  }
+
+  .refresh-news-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(37, 117, 252, 0.6);
+  }
+
+  .refresh-news-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
+  }
