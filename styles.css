@@ -587,8 +587,11 @@ section:nth-child(odd) {
 }
 
 .nav-container.active {
-    max-height: 500px; /* تكفي لعرض كل الروابط */
+    max-height: 600px; /* تكفي لعرض كل الروابط */
     padding: 1rem 0;
+    display: flex !important;
+    flex-direction: column;
+
 }
 
 .nav-container a {
@@ -638,3 +641,14 @@ header, nav {
     transform: scale(0.95);
     box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
   }
+  /* إنجازات – ورثت معظم الخصائص من .card */
+.achievement-card .card-img {
+  height: 160px;          /* أصغر قليلًا لتتلاءم مع الوصف */
+  object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .achievement-card .card-img {
+    height: 120px;
+  }
+}
