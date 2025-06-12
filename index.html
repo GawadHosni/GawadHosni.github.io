@@ -52,7 +52,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body style="background-color: #004080;">
     <!-- الهيدر -->
     <header>
             <img src="schoollogo.jpg" alt="شعار مدرسة جواد حسني" class="school-logo" class="lazy-load">
@@ -374,17 +374,92 @@
   </div>
 </section>
 
-        <!-- قسم التقييمات -->
-        <section id="curriculum" class="fade-in">
-            <br>
-            <br>
-            <h2 class="section-title"> النتائج</h2>
-            <div style="text-align:center; padding:2rem;">
+<!-- قسم النتائج -->
+<!-- قسم النتائج -->
+<section id="curriculum" class="fade-in">
+    <br>
+    <br>
+    <h2 class="section-title"> النتائج</h2>
+
+    <div style="text-align:center; padding:2rem;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; align-items:center;">
+            <!-- رابط النتائج -->
+            <div>
                 <h3 style="margin-bottom:1rem;">رابط النتائج بالرقم القومي</h3>
-                <a href="https://www.gizaedu.net/Results/Stages" class="btn" style="max-width:300px; margin:0 auto;">اضغط هنا للانتقال إلى النتائج</a>
+                <a href="https://www.gizaedu.net/Results/Stages" class="btn" style="max-width:300px;">اضغط هنا للانتقال إلى النتائج</a>
             </div>
-        </section>
-        
+
+            <!-- زر عرض الألبوم -->
+            <div>
+                <h3 style="margin-bottom:1rem;">عرض النتائج يدويًا</h3>
+                <a onclick="toggleAlbum()" class="btn">عرض ألبوم النتائج</a>
+            </div>
+        </div>
+
+        <!-- ألبوم النتائج -->
+        <div id="resultAlbum" style="display:none; margin-top:2rem;">
+            <div id="sliderContainer" style="position:relative; max-width:600px; margin:0 auto; display:none;">
+                <img id="albumImage" src="" alt="صورة النتيجة" style="width:100%; border:1px solid #ccc; border-radius:10px;">
+                <button id="prevBtn" onclick="prevImage()" style="position:absolute; top:50%; left:0; transform:translateY(-50%); background:#00000088; color:white; border:none; padding:10px; border-radius:50%; cursor:pointer;">&#10094;</button>
+                <button id="nextBtn" onclick="nextImage()" style="position:absolute; top:50%; right:0; transform:translateY(-50%); background:#00000088; color:white; border:none; padding:10px; border-radius:50%; cursor:pointer;">&#10095;</button>
+            </div>
+            <p id="albumMessage" style="margin-top:1rem;"></p>
+        </div>
+    </div>
+</section>
+
+<script>
+  const albumImages = [
+    // "images/result1.jpg",
+    // "images/result2.jpg"
+  ];
+  let currentIndex = 0;
+
+  function toggleAlbum() {
+    const album = document.getElementById("resultAlbum");
+    const slider = document.getElementById("sliderContainer");
+    const img = document.getElementById("albumImage");
+    const msg = document.getElementById("albumMessage");
+
+    if (album.style.display === "none") {
+      album.style.display = "block";
+
+      if (albumImages.length > 0) {
+        currentIndex = 0;
+        img.src = albumImages[currentIndex];
+        img.style.display = "block";
+        slider.style.display = "block";
+        msg.textContent = "استخدم الأسهم للتنقل بين أوراق النتيجة";
+      } else {
+        img.style.display = "none";
+        slider.style.display = "none";
+        msg.textContent = "لم يتم رفع صور النتائج بعد.";
+      }
+    } else {
+      album.style.display = "none";
+    }
+  }
+
+  function showImage(index) {
+    const img = document.getElementById("albumImage");
+    img.src = albumImages[index];
+  }
+
+  function nextImage() {
+    if (albumImages.length === 0) return;
+    currentIndex = (currentIndex + 1) % albumImages.length;
+    showImage(currentIndex);
+  }
+
+  function prevImage() {
+    if (albumImages.length === 0) return;
+    currentIndex = (currentIndex - 1 + albumImages.length) % albumImages.length;
+    showImage(currentIndex);
+  }
+</script>
+
+
+
         <!-- قسم التسجيل -->
 <section id="admission" class="fade-in">
     <br><br>
