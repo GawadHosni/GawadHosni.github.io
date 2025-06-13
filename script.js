@@ -1,4 +1,4 @@
-// تحسين كود القائمة المنسدلة
+        // تحسين كود القائمة المنسدلة
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const navContainer = document.querySelector('.nav-container');
@@ -100,4 +100,9 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     lazyLoadImages();
+});
+// بديل بسيط للقائمة المنسدلة
+document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+    const nav = document.querySelector('.nav-container');
+    nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
 });
