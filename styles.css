@@ -702,10 +702,7 @@ header, nav {
   overflow-y: auto;
 }
 
-.subject:hover .teacher-list {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
+/* شيلنا subject:hover .teacher-list نهائيًا */
 
 .teacher-list p {
   margin: 0.5rem 0;
@@ -727,15 +724,12 @@ header, nav {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* التخصيص لشريط التمرير */
 .teacher-list::-webkit-scrollbar {
   width: 10px;
 }
-
 .teacher-list::-webkit-scrollbar-track {
   background: #f8f9fa;
 }
-
 .teacher-list::-webkit-scrollbar-thumb {
   background-color: #0080ff;
   border-radius: 3px;
@@ -746,11 +740,14 @@ header, nav {
     gap: 1rem;
     padding: 1rem;
   }
-  
   .subject-name {
     padding: 0.7rem 1.2rem;
     font-size: 1rem;
   }
+}
+.subject:hover .teacher-list {
+  display: block;
+  animation: fadeIn 0.3s ease;
 }
 .input-style {
   padding: 10px;

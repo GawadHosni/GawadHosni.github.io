@@ -106,3 +106,25 @@ document.querySelector('.mobile-menu-btn').addEventListener('click', function() 
     const nav = document.querySelector('.nav-container');
     nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
 });
+document.addEventListener("DOMContentLoaded", function () {
+  const subjects = document.querySelectorAll(".subject");
+
+  subjects.forEach((subject) => {
+    const button = subject.querySelector(".subject-name");
+    const list = subject.querySelector(".teacher-list");
+
+    button.addEventListener("click", function (e) {
+      // قفل كل القوائم المفتوحة
+      document.querySelectorAll(".teacher-list").forEach((el) => {
+        if (el !== list) el.style.display = "none";
+      });
+
+      // فتح أو إغلاق القائمة المختارة
+      if (list.style.display === "block") {
+        list.style.display = "none";
+      } else {
+        list.style.display = "block";
+      }
+    });
+  });
+});
