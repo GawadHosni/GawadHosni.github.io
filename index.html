@@ -461,17 +461,19 @@
         newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         // عرض الأخبار
-        newsItems.forEach(({ date, title, description, link }) => {
-          const newsItem = document.createElement('div');
-          newsItem.classList.add('news-item');
-          newsItem.innerHTML = `
-            <div class="news-date">${date}</div>
-            <h3>${title}</h3>
-            <p>${description}</p>
-            <a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
-          `;
-          container.appendChild(newsItem);
-        });
+newsItems.forEach(({ date, title, description, link }) => {
+  if (title.trim() !== '' && description.trim() !== '') {
+    const newsItem = document.createElement('div');
+    newsItem.classList.add('news-item');
+    newsItem.innerHTML = `
+      <div class="news-date">${date}</div>
+      <h3>${title}</h3>
+      <p>${description}</p>
+      <a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
+    `;
+    container.appendChild(newsItem);
+  }
+});
       })
       .catch(err => {
         console.error('خطأ في تحميل الأخبار:', err);
