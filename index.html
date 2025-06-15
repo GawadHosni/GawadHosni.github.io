@@ -15,6 +15,8 @@
     <title>مدرسة جواد حسني الرسمية لغات</title>
     <link rel="website icon" href="schoollogo.jpg">
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
     
     <!-- تحسينات SEO -->
     <meta name="description" content="مدرسة جواد حسني الرسمية لغات - مؤسسة تعليمية مميزة تقدم تعليمًا بجودة عالية من رياض الأطفال حتى الإعدادية">
@@ -97,30 +99,14 @@
         <p><strong>المراحل الدراسية:</strong> من رياض الأطفال حتى المرحلة الإعدادية</p>
         <p><strong>العنوان:</strong> شارع السودان، بجوار محطة مترو السودان – الجيزة</p>
         <p><strong>مديرة المدرسة :</strong>الأستاذة شيماء محمد محمد محمد شاهين</p>
-
-<p><strong>من هو جواد حسني ؟ :  </strong>الشهيد جواد علي حسني هو بطل من ابطال المقاومة الشعبية ضد العدوان الثلاثي علي مصر ، ولد بحي جاردن سيتي غرب القاهرة في ٢٠ ابريل ١٩٣٥ التحق بكلية الحقوق جامعة فؤاد الاول عام ١٩٥٢ و في السنة الأخيرة من دراسته قرر التطوع مع مجموعة من الشباب في المقاومة الشعبية للتصدي للعدوان الثلاثي علي مصر و قُتل أثناء المعركة و سميت المدرسة باسمه تقديرا لمجهودته في الدفاع عن أرض مصر</p
-
-
     </div>
     <br>
     <div class="mission-vision">
-        <h3>رؤيتنا:</h3>
-        <p>إعداد جيل واعي و مفكر قادر علي الابداع و التميز المواكب للتكنولوجيا الحديثة في ظل المشاركة المجتمعية الفعالة</p>
+        <h3>رؤيتنا</h3>
+        <p>أن نكون منارة تعليمية رائدة تُسهم في تخريج جيل واعٍ ومبدع يساهم في بناء الوطن.</p>
 
-       <h3>رسالتنا:</h3>
-<ul>
-  <li>تفعيل دور الأنشطة الصفية واللاصفية.</li>
-  <li>تفعيل دور المشاركة المجتمعية.</li>
-  <li>التنمية المهنية المستدامة للمعلمين.</li>
-  <li>الاستخدام الأمثل للتكنولوجيا الحديثة.</li>
-  <li>لغرس القيم الدينية والأخلاقية.</li>
-  <li>رعاية الطلاب الموهوبين.</li>
-  <li>برنامج رعاية الطلاب الضعاف.</li>
-  <li>غرس روح المواطنة والانتماء.</li>
-  <li>تنمية القدرات الإبداعية للمتعلمين.</li>
-  <li>برامج رعاية الطلاب المتفوقين.</li>
-  <li>برامج الإرشاد النفسي لأولياء الأمور، المتعلمين، والمعلمين.</li>
-</ul>
+        <h3>رسالتنا</h3>
+        <p>توفير بيئة تعليمية آمنة ومحفّزة للطلاب، ترتكز على القيم الأخلاقية والمعايير الأكاديمية العالمية.</p>
     </div>
 
     <div class="features">
@@ -181,9 +167,8 @@
     <div class="subject">
   <span class="subject-name">الإدارة المدرسية</span>
   <div class="teacher-list">
-    <p>مديرة المدرسة: شيماء محمد شاهين</p>
-    <p>وكيل ش.م:مجدى أحمد عبد الله</p>
-    <p>وكيلة ش.ط: زينب سامي مبارك</p>
+    <p>شيماء محمدمحمدمحمد شاهين</p>
+    <p>مجدى أحمد عبد الله</p>
   </div>
 </div>
 
@@ -263,13 +248,6 @@
         <p>مرقت زكريا محمد</p>
       </div>
     </div>
-
-      <div class="subject">
-      <span class="subject-name">اللغة الألمانية</span>
-      <div class="teacher-list">
-        <p>علا عماد الدين</p>
-      </div>
-      </div>
 
     <div class="subject">
       <span class="subject-name">العلوم</span>
@@ -372,13 +350,6 @@
     </div>
 
     <div class="subject">
-      <span class="subject-name">المجال الزراعي</span>
-      <div class="teacher-list">
-        <p>مجدي احمد عبد الله</p>
-      </div>
-    </div>
-
-    <div class="subject">
       <span class="subject-name">المسرح</span>
       <div class="teacher-list">
         <p>رشا حسن محمد</p>
@@ -461,19 +432,17 @@
         newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         // عرض الأخبار
-newsItems.forEach(({ date, title, description, link }) => {
-  if (title.trim() !== '' && description.trim() !== '') {
-    const newsItem = document.createElement('div');
-    newsItem.classList.add('news-item');
-    newsItem.innerHTML = `
-      <div class="news-date">${date}</div>
-      <h3>${title}</h3>
-      <p>${description}</p>
-      <a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
-    `;
-    container.appendChild(newsItem);
-  }
-});
+        newsItems.forEach(({ date, title, description, link }) => {
+          const newsItem = document.createElement('div');
+          newsItem.classList.add('news-item');
+          newsItem.innerHTML = `
+            <div class="news-date">${date}</div>
+            <h3>${title}</h3>
+            <p>${description}</p>
+            <a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
+          `;
+          container.appendChild(newsItem);
+        });
       })
       .catch(err => {
         console.error('خطأ في تحميل الأخبار:', err);
@@ -616,20 +585,232 @@ newsItems.forEach(({ date, title, description, link }) => {
     </div>
 
   </div>
-
 </section>
-<!-- قسم نتائج الطلاب -->
+
 <section id="curriculum" class="fade-in">
   <br><br>
-  <h2 class="section-title">نتيجة الطالب بالرقم القومي</h2>
-
-  <div style="text-align:center; padding:2rem;">
-    <input type="text" id="student-id" placeholder="ادخل الرقم القومي" class="input-style" />
-    <button onclick="searchResult()" class="btn" style="margin-top: 1rem;">عرض النتيجة</button>
+  <div class="container">
+    <h2 class="section-title">نتيجة الطالب بالرقم القومي لكل الصفوف من 1 ابتدائي الي 2 اعدادي</h2>
+    <div style="text-align:center; padding:2rem;">
+      <input type="text" id="student-id" placeholder="ادخل الرقم القومي" class="input-style" />
+      <button onclick="searchResult()" class="btn" style="margin-top: 1rem;">عرض النتيجة</button>
+    </div>
+    <div id="result-container" style="text-align:center; margin-top:2rem;"></div>
   </div>
-
-  <div id="result-container" style="text-align:center; margin-top:2rem;"></div>
 </section>
+<script>
+  const csvUrls = {
+    "Grade 1": "grade1.csv",
+    "Grade 2": "grade2.csv",
+    "Grade 3": "grade3.csv",
+    "Grade 4": "grade4.csv",
+    "Grade 5": "grade5.csv",
+    "Grade 6": "grade6.csv",
+    "Grade 7": "results.csv",
+    "Grade 8": "results2.csv",
+  };
+
+  async function fetchCSV(url) {
+    const res = await fetch(url);
+    const text = await res.text();
+    return text.trim().split('\n').map(line => line.split(','));
+  }
+
+  async function searchResult() {
+    const id = document.getElementById('student-id').value.trim();
+    const container = document.getElementById('result-container');
+    container.innerHTML = '';
+
+    if (!id || id.length < 10) {
+      container.innerText = 'الرجاء إدخال الرقم القومي بشكل صحيح.';
+      return;
+    }
+
+    let found = false;
+
+    for (const [grade, url] of Object.entries(csvUrls)) {
+      const rows = await fetchCSV(url);
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        let nationalIdIndex, nameIndex, seatIndex, status = "-", statusIndex = null, subjects = [];
+
+        switch (grade) {
+          case "Grade 1":
+          case "Grade 2":
+            nationalIdIndex = 3;
+            nameIndex = 1;
+            seatIndex = 2;
+            status = row[5];
+            subjects = [
+              { name: "اللغة العربية", index: 6 },
+              { name: "اللغة الإنجليزية", index: 8 },
+              { name: "الرياضيات", index: 10 },
+              { name: "متعدد التخصصات", index: 12 },
+              { name: "تربية بدنية و صحية", index: 14 },
+              { name: "تربية دينية", index: 16 },
+              { name: "القيم و احترام الآخر", index: 18 },
+              { name: "مستوى رفيع", index: 20 },
+              { name: "توكاتسو", index: 22 },
+            ];
+            break;
+
+          case "Grade 3":
+            nationalIdIndex = 2;
+            nameIndex = 1;
+            seatIndex = 3;
+            status = row[4];
+            subjects = [
+              { name: "اللغة العربية", index: 5 },
+              { name: "اللغة الإنجليزية", index: 7 },
+              { name: "الرياضيات", index: 9 },
+              { name: "متعدد التخصصات", index: 11 },
+              { name: "المجموع الكلي", index: 19 },
+              { name: "مستوى رفيع", index: 21 },
+              { name: "تربية دينية", index: 23 },
+              { name: "تربية بدنية و صحية", index: 25 },
+              { name: "القيم و احترام الآخر", index: 27 },
+              { name: "توكاتسو", index: 31 },
+            ];
+            break;
+
+          case "Grade 4":
+          case "Grade 5":
+          case "Grade 6":
+            nationalIdIndex = 2;
+            nameIndex = 1;
+            seatIndex = 3;
+            status = row[4];
+            subjects = [
+              { name: "اللغة العربية", index: 5 },
+              { name: "الرياضيات", index: 7 },
+              { name: "الدراسات", index: 9 },
+              { name: "العلوم", index: 11 },
+              { name: "اللغة الإنجليزية", index: 13 },
+              { name: "ICT", index: 15 },
+              { name: "مهارات مهنية", index: 17 },
+              { name: "المجموع الكلي", index: 19 },
+              { name: "مستوى رفيع", index: 21 },
+              { name: "تربية دينية", index: 23 },
+              { name: "تربية فنية", index: 25 },
+              { name: "تربية رياضية", index: 27 },
+              { name: "تربية موسيقية", index: 29 },
+              { name: "توكاتسو", index: 31 },
+              { name: "القيم و احترام الآخر", index: 33 },
+            ];
+            break;
+
+          case "Grade 7":
+            nationalIdIndex = 7;
+            nameIndex = 6;
+            seatIndex = 5;
+            statusIndex = 26;
+            status = {
+              1: "ناجح",
+              2: "دور ثانٍ",
+              3: "راسب"
+            }[parseInt(row[statusIndex])] || "غير معروف";
+            subjects = [
+              { name: "اللغة العربية", index: 11 },
+              { name: "اللغة الإنجليزية", index: 12 },
+              { name: "الدراسات الاجتماعية", index: 13 },
+              { name: "الرياضيات", index: 14 },
+              { name: "العلوم", index: 15 },
+              { name: "المجموع", index: 16 },
+              { name: "التربية الدينية", index: 17 },
+              { name: "التربية الرياضية", index: 18 },
+              { name: "التربية الفنية", index: 19 },
+              { name: "التربية الموسيقية", index: 20 },
+              { name: "الحاسب الآلي", index: 21 },
+              { name: "النشاط الاختياري 1", index: 22 },
+              { name: "النشاط الاختياري 2", index: 23 },
+              { name: "المستوى الرفيع", index: 24 },
+              { name: "المستوى الرفيع (2)", index: 25 },
+            ];
+            break;
+
+          case "Grade 8":
+            nationalIdIndex = 7;
+            nameIndex = 6;
+            seatIndex = 5;
+            statusIndex = 24;
+            status = {
+              1: "ناجح",
+              2: "دور ثانٍ",
+              3: "راسب"
+            }[parseInt(row[statusIndex])] || "غير معروف";
+            subjects = [
+              { name: "اللغة العربية", index: 11 },
+              { name: "اللغة الإنجليزية", index: 12 },
+              { name: "الدراسات الاجتماعية", index: 13 },
+              { name: "الرياضيات", index: 14 },
+              { name: "العلوم", index: 15 },
+              { name: "المجموع", index: 16 },
+              { name: "التربية الدينية", index: 17 },
+              { name: "التربية الفنية", index: 18 },
+              { name: "الحاسب الآلي", index: 19 },
+              { name: "النشاط الاختياري 1", index: 20 },
+              { name: "النشاط الاختياري 2", index: 21 },
+              { name: "المستوى الرفيع", index: 22 },
+              { name: "المستوى الرفيع (2)", index: 23 },
+            ];
+            break;
+        }
+
+        const nationalId = row[nationalIdIndex]?.replace(/\uFEFF/g, '').trim();
+        if (nationalId === id) {
+          const studentName = row[nameIndex];
+          const seatNumber = row[seatIndex];
+
+          let subjectsHtml = '<h4>التقييمات:</h4><ul style="text-align:right; list-style:none; padding:0">';
+          for (const subject of subjects) {
+            const mark = row[subject.index];
+            if (mark && mark.trim() !== '') {
+              subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
+            }
+          }
+          subjectsHtml += '</ul>';
+          function getArabicGradeName(grade) {
+  const gradeNumber = parseInt(grade.replace("Grade", ""));
+  const gradeNames = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];
+  
+  if (gradeNumber >= 1 && gradeNumber <= 6) {
+    return `الصف ${gradeNames[gradeNumber - 1]} الابتدائي`;
+  } else if (gradeNumber === 7) {
+    return "الصف الأول الإعدادي";
+  } else if (gradeNumber === 8) {
+    return "الصف الثاني الإعدادي";
+  } else {
+    return grade; // fallback
+  }
+}
+
+
+          container.innerHTML = `
+            <h3>الاسم: ${studentName}</h3>
+            <p>الصف: ${getArabicGradeName(grade)}</p>
+            <p>رقم الجلوس: ${seatNumber}</p>
+            <p>النتيجة: ${status}</p>
+            ${subjectsHtml}
+            <h4>دليل الألوان للمرحلة الابتدائية :</h4>
+  <ul style="text-align: right; list-style: none; padding: 0;">
+    <li><span style="color: blue;">أزرق</span> = يفوق التوقعات دائماً</li>
+    <li><span style="color: green;">أخضر</span> = يلبي التوقعات</li>
+    <li><span style="color: goldenrod;">أصفر</span> = يلبي التوقعات أحياناً</li>
+    <li><span style="color: red;">أحمر</span> = أقل من المتوقع</li>
+  </ul>
+          `;
+          found = true;
+          break;
+        }
+      }
+      if (found) break;
+    }
+
+    if (!found) {
+      container.innerHTML = '<p>لم يتم العثور على الطالب بهذا الرقم القومي.</p>';
+    }
+  }
+</script>
 
 
         <!-- قسم التسجيل -->
