@@ -766,16 +766,14 @@
             const mark = row[subject.index];
             if (mark && mark.trim() !== '') {
 if (grade === "Grade 7" || grade === "Grade 8") {
-  // افتراضًا أن الدرجة الكاملة هي 280 في الإعدادي (لو مش دايمًا، ممكن نعدلها حسب كل صف)
-  if (subject.name === "المجموع") {
-    const total = parseFloat(mark);
-    const percentage = isNaN(total) ? "" : ` = ${((total / 280) * 100).toFixed(1)}%`;
-    subjectsHtml += `<li>${subject.name}: ${mark} من 280${percentage}</li>`;
-  } else {
-    subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
-  }
+  const max = subject.max;
+  const markValue = parseFloat(mark);
+  const fromPart = max ? ` من ${max}` : "";
+  const percentage = (subject.name === "المجموع" && !isNaN(markValue) && max)
+    ? ` = ${(markValue / max * 100).toFixed(1)}%`
+    : "";
+  subjectsHtml += `<li>${subject.name}: ${mark}${fromPart}${percentage}</li>`;
 } else {
-  // الابتدائي
   subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
 }
 
