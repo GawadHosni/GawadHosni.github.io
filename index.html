@@ -710,21 +710,21 @@
               3: "راسب"
             }[parseInt(row[statusIndex])] || "غير معروف";
             subjects = [
-              { name: "اللغة العربية", index: 11 },
-              { name: "اللغة الإنجليزية", index: 12 },
-              { name: "الدراسات الاجتماعية", index: 13 },
-              { name: "الرياضيات", index: 14 },
-              { name: "العلوم", index: 15 },
-              { name: "المجموع", index: 16 },
-              { name: "التربية الدينية", index: 17 },
-              { name: "التربية الرياضية", index: 18 },
-              { name: "التربية الفنية", index: 19 },
-              { name: "التربية الموسيقية", index: 20 },
-              { name: "الحاسب الآلي", index: 21 },
-              { name: "النشاط الاختياري 1", index: 22 },
-              { name: "النشاط الاختياري 2", index: 23 },
-              { name: "المستوى الرفيع", index: 24 },
-              { name: "المستوى الرفيع (2)", index: 25 },
+              { name: "اللغة العربية", index: 11, max:80 },
+              { name: "اللغة الإنجليزية", index: 12, max:60 },
+              { name: "الدراسات الاجتماعية", index: 13, max:40 },
+              { name: "الرياضيات", index: 14, max:60 },
+              { name: "العلوم", index: 15, max:40 },
+              { name: "المجموع", index: 16, max:280 },
+              { name: "التربية الدينية", index: 17, max:40 },
+              { name: "التربية الرياضية", index: 18, max:40 },
+              { name: "التربية الفنية", index: 19, max:20 },
+              { name: "التربية الموسيقية", index: 20, max:40 },
+              { name: "الحاسب الآلي", index: 21, max:20 },
+              { name: "النشاط الاختياري 1", index: 22, max:20 },
+              { name: "النشاط الاختياري 2", index: 23, max:20 },
+              { name: "المستوى الرفيع", index: 24, max:50 },
+              { name: "المستوى الرفيع (2)", index: 25, max:40 },
             ];
             break;
 
@@ -739,19 +739,19 @@
               3: "راسب"
             }[parseInt(row[statusIndex])] || "غير معروف";
             subjects = [
-              { name: "اللغة العربية", index: 11 },
-              { name: "اللغة الإنجليزية", index: 12 },
-              { name: "الدراسات الاجتماعية", index: 13 },
-              { name: "الرياضيات", index: 14 },
-              { name: "العلوم", index: 15 },
-              { name: "المجموع", index: 16 },
-              { name: "التربية الدينية", index: 17 },
-              { name: "التربية الفنية", index: 18 },
-              { name: "الحاسب الآلي", index: 19 },
-              { name: "النشاط الاختياري 1", index: 20 },
-              { name: "النشاط الاختياري 2", index: 21 },
-              { name: "المستوى الرفيع", index: 22 },
-              { name: "المستوى الرفيع (2)", index: 23 },
+              { name: "اللغة العربية", index: 11, max:80},
+              { name: "اللغة الإنجليزية", index: 12, max:60 },
+              { name: "الدراسات الاجتماعية", index: 13, max:40 },
+              { name: "الرياضيات", index: 14, max:60 },
+              { name: "العلوم", index: 15, max:40 },
+              { name: "المجموع", index: 16, max:280 },
+              { name: "التربية الدينية", index: 17, max:40 },
+              { name: "التربية الفنية", index: 18, max:20 },
+              { name: "الحاسب الآلي", index: 19, max:20 },
+              { name: "النشاط الاختياري 1", index: 20, max:20 },
+              { name: "النشاط الاختياري 2", index: 21, max:20 },
+              { name: "المستوى الرفيع", index: 22, max:50 },
+              { name: "المستوى الرفيع (2)", index: 23, max:40 },
             ];
             break;
         }
@@ -761,11 +761,25 @@
           const studentName = row[nameIndex];
           const seatNumber = row[seatIndex];
 
-          let subjectsHtml = '<h4>التقييمات:</h4><ul style="text-align:right; list-style:none; padding:0">';
+          let subjectsHtml = '<h4>النتائج:</h4><ul style="text-align:right; list-style:none; padding:0">';
           for (const subject of subjects) {
             const mark = row[subject.index];
             if (mark && mark.trim() !== '') {
-              subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
+if (grade === "Grade 7" || grade === "Grade 8") {
+  // افتراضًا أن الدرجة الكاملة هي 280 في الإعدادي (لو مش دايمًا، ممكن نعدلها حسب كل صف)
+  if (subject.name === "المجموع") {
+    const total = parseFloat(mark);
+    const percentage = isNaN(total) ? "" : ` = ${((total / 280) * 100).toFixed(1)}%`;
+    subjectsHtml += `<li>${subject.name}: ${mark} من 280${percentage}</li>`;
+  } else {
+    subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
+  }
+} else {
+  // الابتدائي
+  subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
+}
+
+
             }
           }
           subjectsHtml += '</ul>';
