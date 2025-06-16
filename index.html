@@ -815,27 +815,29 @@
           const seatNumber = row[seatIndex];
 
           let subjectsHtml = '<h4>النتائج:</h4><ul style="text-align:right; list-style:none; padding:0">';
-          for (const subject of subjects) {
-            const mark = row[subject.index];
-            if (mark && mark.trim() !== '') {
-if (grade === "Grade 7" || grade === "Grade 8") {
-  // افتراضًا أن الدرجة الكاملة هي 280 في الإعدادي (لو مش دايمًا، ممكن نعدلها حسب كل صف)
-  if (subject.name === "المجموع") {
-    const total = parseFloat(mark);
-    const percentage = isNaN(total) ? "" : ` = ${((total / 280) * 100).toFixed(1)}%`;
-    subjectsHtml += `<li>${subject.name}: ${mark} من 280${percentage}</li>`;
-  } else {
-    subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
+for (const subject of subjects) {
+  const mark = row[subject.index];
+  if (mark && mark.trim() !== '') {
+    if (grade === "Grade 7" || grade === "Grade 8") {
+      if (subject.name === "المجموع") {
+        const total = parseFloat(mark);
+        const totalMax = subject.max || 280;
+        const percentage = isNaN(total) ? "" : ` = ${(total / totalMax * 100).toFixed(1)}%`;
+        subjectsHtml += `<li>${subject.name}: ${mark} من ${totalMax}${percentage}</li>`;
+      } else if (subject.max) {
+        const score = parseFloat(mark);
+        subjectsHtml += `<li>${subject.name}: ${score} من ${subject.max}</li>`;
+      } else {
+        subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
+      }
+    } else {
+      // ابتدائي: تقييم فقط (لون أو وصف)
+      subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
+    }
   }
-} else {
-  // الابتدائي
-  subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
 }
+subjectsHtml += '</ul>';
 
-
-            }
-          }
-          subjectsHtml += '</ul>';
           function getArabicGradeName(grade) {
   const gradeNumber = parseInt(grade.replace("Grade", ""));
   const gradeNames = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];
