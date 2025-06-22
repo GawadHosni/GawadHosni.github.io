@@ -481,11 +481,13 @@
           newsItems.push({ date, title, description, link });
         }
 
-        // ترتيب الأخبار من الأحدث للأقدم حسب التاريخ (تاريخ بصيغة قابلة للمقارنة)
+        // ترتيب الأخبار من الأحدث للأقدم حسب التاريخ
         newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // عرض الأخبار
+        // عرض الأخبار فقط لو العنوان والوصف والرابط موجودين
         newsItems.forEach(({ date, title, description, link }) => {
+          if (!title.trim() || !description.trim() || !link.trim() || link.trim() === '#') return;
+
           const newsItem = document.createElement('div');
           newsItem.classList.add('news-item');
           newsItem.innerHTML = `
@@ -508,7 +510,7 @@
 
   // ربط الزر بفنكشن التحديث
   document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
-</script>
+</script>script>
 
 
 
