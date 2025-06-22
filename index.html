@@ -436,7 +436,6 @@
 <script>
   const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
 
-  // دالة بسيطة لتحليل سطر CSV (تدعم علامات الاقتباس)
   function parseCSVLine(line) {
     const result = [];
     let current = '';
@@ -457,7 +456,6 @@
   }
 
   function fetchNews() {
-    // إضافة cache-buster لمنع الكاش
     const csvUrl = baseCsvUrl + '&cacheBuster=' + new Date().getTime();
 
     fetch(csvUrl)
@@ -469,25 +467,28 @@
 
         const newsItems = [];
 
-        // تجاهل رأس الجدول (الصف الأول)
         for (let i = 1; i < lines.length; i++) {
           const cols = parseCSVLine(lines[i]);
-
           const date = cols[1] || '';
           const title = cols[2] || '';
           const description = cols[3] || '';
           const link = cols[4] || '#';
 
-          newsItems.push({ date, title, description, link });
+          // فقط نضيف الأخبار اللي فيها عنوان ووصف ورابط فعلي
+          if (title.trim() && description.trim() && link.trim() && link.trim() !== '#') {
+            newsItems.push({ date, title, description, link });
+          }
         }
 
-        // ترتيب الأخبار من الأحدث للأقدم حسب التاريخ
+        // ترتيب الأخبار من الأحدث للأقدم
         newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // عرض الأخبار فقط لو العنوان والوصف والرابط موجودين
-        newsItems.forEach(({ date, title, description, link }) => {
-          if (!title.trim() || !description.trim() || !link.trim() || link.trim() === '#') return;
+        if (newsItems.length === 0) {
+          container.innerHTML = '<p style="text-align: center;">لا توجد أخبار حالياً.</p>';
+          return;
+        }
 
+        newsItems.forEach(({ date, title, description, link }) => {
           const newsItem = document.createElement('div');
           newsItem.classList.add('news-item');
           newsItem.innerHTML = `
@@ -508,7 +509,7 @@
   // تحميل الأخبار عند فتح الصفحة
   fetchNews();
 
-  // ربط الزر بفنكشن التحديث
+  // زر تحديث الأخبار
   document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
 </script>
 
