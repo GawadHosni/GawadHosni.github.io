@@ -761,3 +761,36 @@ header, nav {
   border-radius: 6px;
   text-align: right;
 }
+.result-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.result-card {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 110px;
+  padding: 0.6rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+.result-card:hover {
+  transform: scale(1.05);
+}
+
+.result-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #004080;
+}
+
+.result-subject {
+  font-size: 0.85rem;
+  color: #333;
+}
