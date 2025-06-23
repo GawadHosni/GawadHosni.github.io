@@ -432,6 +432,264 @@
   <br>
   <div id="news-container"></div>
 </section>
+<script>
+  const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
+
+  function parseCSV(content) {
+    const rows = [];
+    const lines = content.split('\n');
+    let currentRow = '';
+    let insideQuotes = false;
+
+    for (let line of lines) {
+      if (!insideQuotes) {
+        currentRow = line;
+      } else {
+        currentRow += '\n' + line;
+      }
+
+      const quoteCount = (currentRow.match(/"/g) || []).length;
+      insideQuotes = quoteCount % 2 !== 0;
+
+      if (!insideQuotes) {
+        rows.push(parseCSVLine(currentRow));
+      }
+    }
+    return rows;
+  }
+
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current.trim().replace(/^"|"$/g, ''));
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current.trim().replace(/^"|"$/g, ''));
+    return result;
+  }
+
+  function fetchNews() {
+    const csvUrl = baseCsvUrl + '&cacheBuster=' + new Date().getTime();
+    fetch(csvUrl)
+      .then(response => response.text())
+      .then(text => {
+        const lines = parseCSV(text.trim());
+        const container = document.getElementById('news-container');
+        container.innerHTML = '';
+
+        const newsItems = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i];
+          const date = cols[1] || '';
+          const title = cols[2] || '';
+          const description = cols[3] || '';
+          const link = cols[4] || '';
+
+          // فقط تجاهل الأخبار اللي فعلاً فاضية تمامًا
+          if (title.trim() && description.trim()) {
+            newsItems.push({ date, title, description, link });
+          }
+        }
+
+        newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (newsItems.length === 0) {
+          container.innerHTML = '<p style="text-align: center;">لا توجد أخبار حالياً.</p>';
+          return;
+        }
+
+        newsItems.forEach(({ date, title, description, link }) => {
+          const newsItem = document.createElement('div');
+          newsItem.classList.add('news-item');
+
+          const linkHtml = link.trim()
+            ? `<a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>`
+            : '';
+
+          newsItem.innerHTML = `
+            <div class="news-date">${date}</div>
+            <h3>${title}</h3>
+            <p>${description.replace(/\n/g, '<br>')}</p>
+            ${linkHtml}
+          `;
+          container.appendChild(newsItem);
+        });
+      })
+      .catch(err => {
+        console.error('خطأ في تحميل الأخبار:', err);
+        document.getElementById('news-container').innerText = 'فشل في تحميل الأخبار.';
+      });
+  }
+
+  fetchNews();
+  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
+</script>
+
+
+
+
+
+        
+        <!-- قسم المواعيد الهامة -->
+        <section id="events" class="fade-in">
+            <br>
+            <br>
+            <h2 class="section-title">المواعيد الهامة</h2>
+            
+            <div class="event">
+                <h3>امتحانات  الشهر الثاني (مارس) </h3>
+                <p class="event-date">22 أبريل 2025</p>
+                <p>تبدأ امتحانات  الشهر الثاني لجميع الصفوف</p>
+            </div>
+            
+            <div class="event">
+                <h3>امتحانات نهاية الفصل الدراسي الثاني</h3>
+                <p class="event-date">24 مايو 2025</p>
+                <p>إجازة لمدة أسبوع بعد انتهاء امتحانات منتصف الفصل</p>
+            </div>
+            
+            <div class="event">
+                <h3>حفل نهاية العام</h3>
+                <p class="event-date">30 مايو 2025</p>
+                <p>احتفالية نهاية العام الدراسي وتكريم المتفوقين</p>
+            </div>
+        </section>
+        
+        <!-- قسم الطلاب المتفوقون -->
+        <section id="students" class="fade-in">
+            <br>
+            <br>
+            <h2 class="section-title">الطلاب المتفوقون</h2>
+            <div style="text-align:center;">
+                <img src="students.jpg" alt="الطلاب المتفوقون" style="max-width:100%; border-radius:8px; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                <p style="margin-top:1rem;">نفخر في مدرستنا بالطلاب المتفوقين الذين يمثلون نموذجًا للجد والاجتهاد. يتم تكريم المتفوقين شهريًا في الطابور المدرسي ومن خلال نشر أسمائهم في هذا القسم.</p>
+            </div>
+        </section>
+        <!-- قسم الطلاب المشاغبين -->
+        <section id="discipline" class="fade-in">
+    <br><br>
+    <h2 class="section-title">قسم المشاغبين</h2>
+    <p style="text-align:center; margin-bottom: 20px;">يُستخدم هذا القسم لتوثيق أسماء الطلاب المخالفين، وفصولهم، والعقوبات المقررة عليهم.</p>
+
+    <div style="overflow-x:auto;">
+        <table border="1" style="width:100%; border-collapse: collapse; text-align: center;">
+            <thead style="background-color: #f2f2f2;">
+                <tr>
+                    <th>الاسم</th>
+                    <th>الفصل</th>
+                    <th>العقوبة</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <!-- أضف طلاب آخرين هنا -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
+        <!-- قسم الإنجازات -->
+<section id="achievements" class="fade-in">
+  <br><br>
+  <h2 class="section-title">الإنجازات</h2>
+
+  <div class="grid-container achievements-grid">
+     <div class="card achievement-card">
+      <a href="Sandy.png" target="_blank" rel="noopener">
+        <img src="Sandy.png" alt="اسم الإنجاز" class="card-img">
+      </a>
+      <div class="card-body">
+        <h3 class="card-title">حصول الطالبة ساندي نبيل بوز نان علي المركز السادس عشر علي مستوي الإدارة</h3>
+        <p class="card-text">
+             حصول الطالبة ساندي نبيل بوز نان علي المركز السادس عشر في ترتيب اوائل الشهادة الاعدادية علي مستوي الإدارة و المركز الاول علي مستوي المدرسة ، بالتوفيق الطالبة ساندي في المرحلة الثانوية.
+        </p>
+      </div>
+    </div>
+
+    <div class="card achievement-card">
+      <a href="champ3.png" target="_blank" rel="noopener">
+        <img src="champ3.png" alt="اسم الإنجاز" class="card-img">
+      </a>
+      <div class="card-body">
+        <h3 class="card-title">حصول الطالب / معاذ مدحت علي المركز الاول علي مستوي ادارة شمال الجيزة</h3>
+        <p class="card-text">
+            حصل الطالب معاذ مدحت علي المركز الاول علي مستوي شمال الجيزة و الثامن علي مستوي المحافظة في مسابقة اعرف محافظتك في قسم الفيديوهات و نتمني له التوفيق و النجاح المستمر
+        </p>
+      </div>
+    </div>
+    <!-- بطاقة إنجاز: انسخ-والصق لتضيف إنجازات أخرى -->
+    <div class="card achievement-card">
+      <a href="https://www.facebook.com/share/p/1EMJujd5TV/" target="_blank" rel="noopener">
+        <img src="champ2.png" alt="اسم الإنجاز" class="card-img">
+      </a>
+      <div class="card-body">
+        <h3 class="card-title">فوز الطالب / كريم عبد العزيز بالميدالية البرونزية مع فريقه في كرة اليد</h3>
+        <p class="card-text">
+            تهنئ اسرة المدرسة ابنها البطل الصغير / كريم عبد العزيز ابراهيم الطالب بالصف الاول الاعدادى و لاعب كرة اليد بمركز شباب الجزيرة  بحصول الفريق على الميدالية البرونزية لدورة اتحاد اللعبة التنشيطية مواليد 2010 وحصول ( كيمو ) على افضل حارس مرمى فى البطولة . 
+الف مبروك والى مزيد من التقدم والتميز 
+        </p>
+        <a href="https://www.facebook.com/share/p/1EMJujd5TV/" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
+      </div>
+    </div>
+    <!-- /بطاقة إنجاز -->
+         <div class="card achievement-card">
+      <a href="https://www.facebook.com/share/p/1AdTtKDgvn/" target="_blank" rel="noopener">
+        <img src="champ.jpg" alt="اسم الإنجاز" class="card-img">
+      </a>
+      <div class="card-body">
+        <h3 class="card-title">تهنئة الطالبة / مريم احمد ابراهيم عبد المجيد بفوزها بالمركز الثانى جمهورى</h3>
+        <p class="card-text">
+          تهنئ ادارة المدرسة بقيادة ا/ شيماء شاهين مديرة المدرسة ابنتها الجميلة الطالبة / مريم احمد ابراهيم عبد المجيد بفوزها بالمركز الثانى جمهورى فى مسابقة اصنع كتابك الإلكتروني.  
+دائما جواد حسنى الرسمية لغات الأرض الخصية للمتفوقين .
+الف مبروك للجميلة ( ميمى ) والى مزيد من التفوق والتميز  باذن الله
+        </p>
+        <a href="https://www.facebook.com/share/p/1AdTtKDgvn/" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
+      </div>
+    </div>
+    <div class="card achievement-card">
+      <img src="schoollogo.jpg" alt="اسم الإنجاز" class="card-img">
+      <div class="card-body">
+        <h3 class="card-title">فوز مدرستنا في مسابقة اجمل مدرسة</h3>
+        <p class="card-text">
+            لقد فازت مدرسة جواد حسني الرسمية لغات باجمل مدرسة علي مستوي الإدارة التعليمية (إدارة شمال الجيزة) و نشكر كل من ساهم في هذا النجاح
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="curriculum" class="fade-in">
+  <br><br>
+  <div class="container">
+    <h2 class="section-title">نتيجة الطالب بالرقم القومي لكل الصفوف من 1 ابتدائي الي 2 اعدادي</h2>
+    <div style="text-align:center; padding:2rem;">
+      <input type="text" id="student-id" placeholder="ادخل الرقم القومي" class="input-style" />
+      <button onclick="searchResult()" class="btn" style="margin-top: 1rem;">عرض النتيجة</button>
+    </div>
+    <div id="result-container" style="text-align:center; margin-top:2rem;"></div>
+  </div>
+</section>
 
 <script>  
   const csvUrls = {  
@@ -671,399 +929,6 @@ subjectsHtml += '</div>';
       container.innerHTML = '<p>لم يتم العثور على الطالب بهذا الرقم القومي.</p>';  
     }  
   }  
-</script>
-
-
-
-
-        
-        <!-- قسم المواعيد الهامة -->
-        <section id="events" class="fade-in">
-            <br>
-            <br>
-            <h2 class="section-title">المواعيد الهامة</h2>
-            
-            <div class="event">
-                <h3>امتحانات  الشهر الثاني (مارس) </h3>
-                <p class="event-date">22 أبريل 2025</p>
-                <p>تبدأ امتحانات  الشهر الثاني لجميع الصفوف</p>
-            </div>
-            
-            <div class="event">
-                <h3>امتحانات نهاية الفصل الدراسي الثاني</h3>
-                <p class="event-date">24 مايو 2025</p>
-                <p>إجازة لمدة أسبوع بعد انتهاء امتحانات منتصف الفصل</p>
-            </div>
-            
-            <div class="event">
-                <h3>حفل نهاية العام</h3>
-                <p class="event-date">30 مايو 2025</p>
-                <p>احتفالية نهاية العام الدراسي وتكريم المتفوقين</p>
-            </div>
-        </section>
-        
-        <!-- قسم الطلاب المتفوقون -->
-        <section id="students" class="fade-in">
-            <br>
-            <br>
-            <h2 class="section-title">الطلاب المتفوقون</h2>
-            <div style="text-align:center;">
-                <img src="students.jpg" alt="الطلاب المتفوقون" style="max-width:100%; border-radius:8px; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
-                <p style="margin-top:1rem;">نفخر في مدرستنا بالطلاب المتفوقين الذين يمثلون نموذجًا للجد والاجتهاد. يتم تكريم المتفوقين شهريًا في الطابور المدرسي ومن خلال نشر أسمائهم في هذا القسم.</p>
-            </div>
-        </section>
-        <!-- قسم الطلاب المشاغبين -->
-        <section id="discipline" class="fade-in">
-    <br><br>
-    <h2 class="section-title">قسم المشاغبين</h2>
-    <p style="text-align:center; margin-bottom: 20px;">يُستخدم هذا القسم لتوثيق أسماء الطلاب المخالفين، وفصولهم، والعقوبات المقررة عليهم.</p>
-
-    <div style="overflow-x:auto;">
-        <table border="1" style="width:100%; border-collapse: collapse; text-align: center;">
-            <thead style="background-color: #f2f2f2;">
-                <tr>
-                    <th>الاسم</th>
-                    <th>الفصل</th>
-                    <th>العقوبة</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <!-- أضف طلاب آخرين هنا -->
-            </tbody>
-        </table>
-    </div>
-</section>
-
-        <!-- قسم الإنجازات -->
-<section id="achievements" class="fade-in">
-  <br><br>
-  <h2 class="section-title">الإنجازات</h2>
-
-  <div class="grid-container achievements-grid">
-     <div class="card achievement-card">
-      <a href="Sandy.png" target="_blank" rel="noopener">
-        <img src="Sandy.png" alt="اسم الإنجاز" class="card-img">
-      </a>
-      <div class="card-body">
-        <h3 class="card-title">حصول الطالبة ساندي نبيل بوز نان علي المركز السادس عشر علي مستوي الإدارة</h3>
-        <p class="card-text">
-             حصول الطالبة ساندي نبيل بوز نان علي المركز السادس عشر في ترتيب اوائل الشهادة الاعدادية علي مستوي الإدارة و المركز الاول علي مستوي المدرسة ، بالتوفيق الطالبة ساندي في المرحلة الثانوية.
-        </p>
-      </div>
-    </div>
-
-    <div class="card achievement-card">
-      <a href="champ3.png" target="_blank" rel="noopener">
-        <img src="champ3.png" alt="اسم الإنجاز" class="card-img">
-      </a>
-      <div class="card-body">
-        <h3 class="card-title">حصول الطالب / معاذ مدحت علي المركز الاول علي مستوي ادارة شمال الجيزة</h3>
-        <p class="card-text">
-            حصل الطالب معاذ مدحت علي المركز الاول علي مستوي شمال الجيزة و الثامن علي مستوي المحافظة في مسابقة اعرف محافظتك في قسم الفيديوهات و نتمني له التوفيق و النجاح المستمر
-        </p>
-      </div>
-    </div>
-    <!-- بطاقة إنجاز: انسخ-والصق لتضيف إنجازات أخرى -->
-    <div class="card achievement-card">
-      <a href="https://www.facebook.com/share/p/1EMJujd5TV/" target="_blank" rel="noopener">
-        <img src="champ2.png" alt="اسم الإنجاز" class="card-img">
-      </a>
-      <div class="card-body">
-        <h3 class="card-title">فوز الطالب / كريم عبد العزيز بالميدالية البرونزية مع فريقه في كرة اليد</h3>
-        <p class="card-text">
-            تهنئ اسرة المدرسة ابنها البطل الصغير / كريم عبد العزيز ابراهيم الطالب بالصف الاول الاعدادى و لاعب كرة اليد بمركز شباب الجزيرة  بحصول الفريق على الميدالية البرونزية لدورة اتحاد اللعبة التنشيطية مواليد 2010 وحصول ( كيمو ) على افضل حارس مرمى فى البطولة . 
-الف مبروك والى مزيد من التقدم والتميز 
-        </p>
-        <a href="https://www.facebook.com/share/p/1EMJujd5TV/" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
-      </div>
-    </div>
-    <!-- /بطاقة إنجاز -->
-         <div class="card achievement-card">
-      <a href="https://www.facebook.com/share/p/1AdTtKDgvn/" target="_blank" rel="noopener">
-        <img src="champ.jpg" alt="اسم الإنجاز" class="card-img">
-      </a>
-      <div class="card-body">
-        <h3 class="card-title">تهنئة الطالبة / مريم احمد ابراهيم عبد المجيد بفوزها بالمركز الثانى جمهورى</h3>
-        <p class="card-text">
-          تهنئ ادارة المدرسة بقيادة ا/ شيماء شاهين مديرة المدرسة ابنتها الجميلة الطالبة / مريم احمد ابراهيم عبد المجيد بفوزها بالمركز الثانى جمهورى فى مسابقة اصنع كتابك الإلكتروني.  
-دائما جواد حسنى الرسمية لغات الأرض الخصية للمتفوقين .
-الف مبروك للجميلة ( ميمى ) والى مزيد من التفوق والتميز  باذن الله
-        </p>
-        <a href="https://www.facebook.com/share/p/1AdTtKDgvn/" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>
-      </div>
-    </div>
-    <div class="card achievement-card">
-      <img src="schoollogo.jpg" alt="اسم الإنجاز" class="card-img">
-      <div class="card-body">
-        <h3 class="card-title">فوز مدرستنا في مسابقة اجمل مدرسة</h3>
-        <p class="card-text">
-            لقد فازت مدرسة جواد حسني الرسمية لغات باجمل مدرسة علي مستوي الإدارة التعليمية (إدارة شمال الجيزة) و نشكر كل من ساهم في هذا النجاح
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section id="curriculum" class="fade-in">
-  <br><br>
-  <div class="container">
-    <h2 class="section-title">نتيجة الطالب بالرقم القومي لكل الصفوف من 1 ابتدائي الي 2 اعدادي</h2>
-    <div style="text-align:center; padding:2rem;">
-      <input type="text" id="student-id" placeholder="ادخل الرقم القومي" class="input-style" />
-      <button onclick="searchResult()" class="btn" style="margin-top: 1rem;">عرض النتيجة</button>
-    </div>
-    <div id="result-container" style="text-align:center; margin-top:2rem;"></div>
-  </div>
-</section>
-
-<script>
-  const csvUrls = {
-    "Grade 1": "grade1.csv",
-    "Grade 2": "grade2.csv",
-    "Grade 3": "grade3.csv",
-    "Grade 4": "grade4.csv",
-    "Grade 5": "grade5.csv",
-    "Grade 6": "grade6.csv",
-    "Grade 7": "results.csv",
-    "Grade 8": "results2.csv",
-  };
-
-  async function fetchCSV(url) {
-    const res = await fetch(url);
-    const text = await res.text();
-    return text.trim().split('\n').map(line => line.split(','));
-  }
-
-  async function searchResult() {
-    const id = document.getElementById('student-id').value.trim();
-    const container = document.getElementById('result-container');
-    container.innerHTML = '';
-
-    if (!id || id.length < 10) {
-      container.innerText = 'الرجاء إدخال الرقم القومي بشكل صحيح.';
-      return;
-    }
-
-    let found = false;
-
-    for (const [grade, url] of Object.entries(csvUrls)) {
-      const rows = await fetchCSV(url);
-      for (let i = 1; i < rows.length; i++) {
-        const row = rows[i];
-        let nationalIdIndex, nameIndex, seatIndex, status = "-", statusIndex = null, subjects = [];
-
-        switch (grade) {
-          case "Grade 1":
-          case "Grade 2":
-            nationalIdIndex = 3;
-            nameIndex = 1;
-            seatIndex = 2;
-            status = row[5];
-            subjects = [
-              { name: "اللغة العربية", index: 6 },
-              { name: "اللغة الإنجليزية", index: 8 },
-              { name: "الرياضيات", index: 10 },
-              { name: "متعدد التخصصات", index: 12 },
-              { name: "تربية بدنية و صحية", index: 14 },
-              { name: "تربية دينية", index: 16 },
-              { name: "القيم و احترام الآخر", index: 18 },
-              { name: "مستوى رفيع", index: 20 },
-              { name: "توكاتسو", index: 22 },
-            ];
-            break;
-
-          case "Grade 3":
-            nationalIdIndex = 2;
-            nameIndex = 1;
-            seatIndex = 3;
-            status = row[4];
-            subjects = [
-              { name: "اللغة العربية", index: 5 },
-              { name: "اللغة الإنجليزية", index: 7 },
-              { name: "الرياضيات", index: 9 },
-              { name: "متعدد التخصصات", index: 11 },
-              { name: "المجموع الكلي", index: 19 },
-              { name: "مستوى رفيع", index: 21 },
-              { name: "تربية دينية", index: 23 },
-              { name: "تربية بدنية و صحية", index: 25 },
-              { name: "القيم و احترام الآخر", index: 27 },
-              { name: "توكاتسو", index: 31 },
-            ];
-            break;
-
-          case "Grade 4":
-          case "Grade 5":
-          case "Grade 6":
-            nationalIdIndex = 2;
-            nameIndex = 1;
-            seatIndex = 3;
-            status = row[4];
-            subjects = [
-              { name: "اللغة العربية", index: 5 },
-              { name: "الرياضيات", index: 7 },
-              { name: "الدراسات", index: 9 },
-              { name: "العلوم", index: 11 },
-              { name: "اللغة الإنجليزية", index: 13 },
-              { name: "ICT", index: 15 },
-              { name: "مهارات مهنية", index: 17 },
-              { name: "المجموع الكلي", index: 19 },
-              { name: "مستوى رفيع", index: 21 },
-              { name: "تربية دينية", index: 23 },
-              { name: "تربية فنية", index: 25 },
-              { name: "تربية رياضية", index: 27 },
-              { name: "تربية موسيقية", index: 29 },
-              { name: "توكاتسو", index: 31 },
-              { name: "القيم و احترام الآخر", index: 33 },
-            ];
-            break;
-
-          case "Grade 7":
-            nationalIdIndex = 7;
-            nameIndex = 6;
-            seatIndex = 5;
-            statusIndex = 26;
-            status = {
-              1: "ناجح",
-              2: "دور ثانٍ",
-              3: "راسب"
-            }[parseInt(row[statusIndex])] || "غير معروف";
-            subjects = [
-              { name: "اللغة العربية", index: 11, max: 80 },
-              { name: "اللغة الإنجليزية", index: 12, max: 60 },
-              { name: "الدراسات الاجتماعية", index: 13, max: 40 },
-              { name: "الرياضيات", index: 14, max: 60 },
-              { name: "العلوم", index: 15, max: 40 },
-              { name: "المجموع", index: 16, max: 280 },
-              { name: "التربية الدينية", index: 17, max: 40 },
-              { name: "التربية الرياضية", index: 18, max: 40 },
-              { name: "التربية الفنية", index: 19, max: 20 },
-              { name: "التربية الموسيقية", index: 20, max: 40 },
-              { name: "الحاسب الآلي", index: 21, max: 20 },
-              { name: "النشاط الاختياري 1", index: 22, max: 20 },
-              { name: "النشاط الاختياري 2", index: 23, max: 20 },
-              { name: "المستوى الرفيع", index: 24, max: 50 },
-              { name: "المستوى الرفيع (2)", index: 25, max: 40 },
-            ];
-            break;
-
-          case "Grade 8":
-            nationalIdIndex = 7;
-            nameIndex = 6;
-            seatIndex = 5;
-            statusIndex = 24;
-            status = {
-              1: "ناجح",
-              2: "دور ثانٍ",
-              3: "راسب"
-            }[parseInt(row[statusIndex])] || "غير معروف";
-            subjects = [
-              { name: "اللغة العربية", index: 11, max: 80 },
-              { name: "اللغة الإنجليزية", index: 12, max: 60 },
-              { name: "الدراسات الاجتماعية", index: 13, max: 40 },
-              { name: "الرياضيات", index: 14, max: 60 },
-              { name: "العلوم", index: 15, max: 40 },
-              { name: "المجموع", index: 16, max: 280 },
-              { name: "التربية الدينية", index: 17, max: 40 },
-              { name: "التربية الفنية", index: 18, max: 20 },
-              { name: "الحاسب الآلي", index: 19, max: 20 },
-              { name: "النشاط الاختياري 1", index: 20, max: 20 },
-              { name: "النشاط الاختياري 2", index: 21, max: 20 },
-              { name: "المستوى الرفيع", index: 22, max: 50 },
-              { name: "المستوى الرفيع (2)", index: 23, max: 40 },
-            ];
-            break;
-        }
-
-        const nationalId = row[nationalIdIndex]?.replace(/\uFEFF/g, '').trim();
-        if (nationalId === id) {
-          const studentName = row[nameIndex];
-          const seatNumber = row[seatIndex];
-
-          let subjectsHtml = '<h4>النتائج:</h4><div class="result-cards-container">';
-          for (const subject of subjects) {
-            const mark = row[subject.index];
-            if (mark && mark.trim() !== '') {
-              if (grade === "Grade 7" || grade === "Grade 8") {
-                const score = parseFloat(mark);
-                if (subject.name === "المجموع") {
-                  const total = parseFloat(mark);
-                  const percentage = isNaN(total) ? "" : ` = ${(total / subject.max * 100).toFixed(1)}%`;
-                  subjectsHtml += `
-                    <div class="result-card">
-                      <div class="result-value">${total} / ${subject.max}<br><small>${percentage}</small></div>
-                      <div class="result-subject">${subject.name}</div>
-                    </div>
-                  `;
-                } else {
-                  subjectsHtml += `
-                    <div class="result-card">
-                      <div class="result-value">${score} / ${subject.max}</div>
-                      <div class="result-subject">${subject.name}</div>
-                    </div>
-                  `;
-                }
-              } else {
-                subjectsHtml += `
-                  <div class="result-card">
-                    <div class="result-value">${mark}</div>
-                    <div class="result-subject">${subject.name}</div>
-                  </div>
-                `;
-              }
-            }
-          }
-          subjectsHtml += '</div>';
-
-          function getArabicGradeName(grade) {
-            const gradeNumber = parseInt(grade.replace("Grade", ""));
-            const gradeNames = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];
-            if (gradeNumber >= 1 && gradeNumber <= 6) {
-              return `الصف ${gradeNames[gradeNumber - 1]} الابتدائي`;
-            } else if (gradeNumber === 7) {
-              return "الصف الأول الإعدادي";
-            } else if (gradeNumber === 8) {
-              return "الصف الثاني الإعدادي";
-            } else {
-              return grade;
-            }
-          }
-
-          container.innerHTML = `
-            <h3>الاسم: ${studentName}</h3>
-            <p>الصف: ${getArabicGradeName(grade)}</p>
-            <p>رقم الجلوس: ${seatNumber}</p>
-            <p>النتيجة: ${status}</p>
-            ${subjectsHtml}
-            <h4>دليل الألوان للمرحلة الابتدائية :</h4>
-            <ul style="text-align: right; list-style: none; padding: 0;">
-              <li><span style="color: blue;">أزرق</span> = يفوق التوقعات دائماً</li>
-              <li><span style="color: green;">أخضر</span> = يلبي التوقعات</li>
-              <li><span style="color: goldenrod;">أصفر</span> = يلبي التوقعات أحياناً</li>
-              <li><span style="color: red;">أحمر</span> = أقل من المتوقع</li>
-            </ul>
-          `;
-          found = true;
-          break;
-        }
-      }
-      if (found) break;
-    }
-
-    if (!found) {
-      container.innerHTML = '<p>لم يتم العثور على الطالب بهذا الرقم القومي.</p>';
-    }
-  }
 </script>
 
 
