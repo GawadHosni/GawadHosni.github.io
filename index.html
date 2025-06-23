@@ -426,7 +426,7 @@
   <h2 class="section-title">أخبار المدرسة</h2>
 
   <!-- زر تحديث الأخبار -->
-  <button id="refresh-news-btn" class="btn refresh-news-btn">تحديث الأخبار</button>
+  <button id="refresh-news" class="refresh-news">تحديث الأخبار</button>
   <br>
   <br>
   <div id="news-container"></div>
@@ -532,7 +532,7 @@
   }
 
   fetchNews();
-  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
+  document.getElementById('refresh-news').addEventListener('click', fetchNews);
 </script>
 
 
