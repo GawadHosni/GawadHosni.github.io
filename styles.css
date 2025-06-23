@@ -77,7 +77,7 @@ nav {
 .nav-container {
     display: flex;
     justify-content: center;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 1rem;
     font-family: "Tajawal", sans-serif;
@@ -580,6 +580,7 @@ section:nth-child(odd) {
     gap: 10px;
     justify-content: center;
     align-items: stretch;
+    margin-top: 50px;
   }
 
   .nav-container a {
