@@ -803,21 +803,21 @@
               3: "راسب"
             }[parseInt(row[statusIndex])] || "غير معروف";
             subjects = [
-              { name: "اللغة العربية", index: 11, max:80 },
-              { name: "اللغة الإنجليزية", index: 12, max:60 },
-              { name: "الدراسات الاجتماعية", index: 13, max:40 },
-              { name: "الرياضيات", index: 14, max:60 },
-              { name: "العلوم", index: 15, max:40 },
-              { name: "المجموع", index: 16, max:280 },
-              { name: "التربية الدينية", index: 17, max:40 },
-              { name: "التربية الرياضية", index: 18, max:40 },
-              { name: "التربية الفنية", index: 19, max:20 },
-              { name: "التربية الموسيقية", index: 20, max:40 },
-              { name: "الحاسب الآلي", index: 21, max:20 },
-              { name: "النشاط الاختياري 1", index: 22, max:20 },
-              { name: "النشاط الاختياري 2", index: 23, max:20 },
-              { name: "المستوى الرفيع", index: 24, max:50 },
-              { name: "المستوى الرفيع (2)", index: 25, max:40 },
+              { name: "اللغة العربية", index: 11, max: 80 },
+              { name: "اللغة الإنجليزية", index: 12, max: 60 },
+              { name: "الدراسات الاجتماعية", index: 13, max: 40 },
+              { name: "الرياضيات", index: 14, max: 60 },
+              { name: "العلوم", index: 15, max: 40 },
+              { name: "المجموع", index: 16, max: 280 },
+              { name: "التربية الدينية", index: 17, max: 40 },
+              { name: "التربية الرياضية", index: 18, max: 40 },
+              { name: "التربية الفنية", index: 19, max: 20 },
+              { name: "التربية الموسيقية", index: 20, max: 40 },
+              { name: "الحاسب الآلي", index: 21, max: 20 },
+              { name: "النشاط الاختياري 1", index: 22, max: 20 },
+              { name: "النشاط الاختياري 2", index: 23, max: 20 },
+              { name: "المستوى الرفيع", index: 24, max: 50 },
+              { name: "المستوى الرفيع (2)", index: 25, max: 40 },
             ];
             break;
 
@@ -832,19 +832,19 @@
               3: "راسب"
             }[parseInt(row[statusIndex])] || "غير معروف";
             subjects = [
-              { name: "اللغة العربية", index: 11, max:80},
-              { name: "اللغة الإنجليزية", index: 12, max:60 },
-              { name: "الدراسات الاجتماعية", index: 13, max:40 },
-              { name: "الرياضيات", index: 14, max:60 },
-              { name: "العلوم", index: 15, max:40 },
-              { name: "المجموع", index: 16, max:280 },
-              { name: "التربية الدينية", index: 17, max:40 },
-              { name: "التربية الفنية", index: 18, max:20 },
-              { name: "الحاسب الآلي", index: 19, max:20 },
-              { name: "النشاط الاختياري 1", index: 20, max:20 },
-              { name: "النشاط الاختياري 2", index: 21, max:20 },
-              { name: "المستوى الرفيع", index: 22, max:50 },
-              { name: "المستوى الرفيع (2)", index: 23, max:40 },
+              { name: "اللغة العربية", index: 11, max: 80 },
+              { name: "اللغة الإنجليزية", index: 12, max: 60 },
+              { name: "الدراسات الاجتماعية", index: 13, max: 40 },
+              { name: "الرياضيات", index: 14, max: 60 },
+              { name: "العلوم", index: 15, max: 40 },
+              { name: "المجموع", index: 16, max: 280 },
+              { name: "التربية الدينية", index: 17, max: 40 },
+              { name: "التربية الفنية", index: 18, max: 20 },
+              { name: "الحاسب الآلي", index: 19, max: 20 },
+              { name: "النشاط الاختياري 1", index: 20, max: 20 },
+              { name: "النشاط الاختياري 2", index: 21, max: 20 },
+              { name: "المستوى الرفيع", index: 22, max: 50 },
+              { name: "المستوى الرفيع (2)", index: 23, max: 40 },
             ];
             break;
         }
@@ -854,7 +854,7 @@
           const studentName = row[nameIndex];
           const seatNumber = row[seatIndex];
 
-          let subjectsHtml = '<h4>النتائج:</h4><div class="cards-container">';
+          let subjectsHtml = '<h4>النتائج:</h4><div class="result-cards-container">';
           for (const subject of subjects) {
             const mark = row[subject.index];
             if (mark && mark.trim() !== '') {
@@ -864,24 +864,24 @@
                   const total = parseFloat(mark);
                   const percentage = isNaN(total) ? "" : ` = ${(total / subject.max * 100).toFixed(1)}%`;
                   subjectsHtml += `
-                    <div class="subject-card">
-                      <div class="subject-name">${subject.name}</div>
-                      <div class="subject-value">${total} من ${subject.max}${percentage}</div>
+                    <div class="result-card">
+                      <div class="result-value">${total} / ${subject.max}<br><small>${percentage}</small></div>
+                      <div class="result-subject">${subject.name}</div>
                     </div>
                   `;
                 } else {
                   subjectsHtml += `
-                    <div class="subject-card">
-                      <div class="subject-name">${subject.name}</div>
-                      <div class="subject-value">${score} من ${subject.max}</div>
+                    <div class="result-card">
+                      <div class="result-value">${score} / ${subject.max}</div>
+                      <div class="result-subject">${subject.name}</div>
                     </div>
                   `;
                 }
               } else {
                 subjectsHtml += `
-                  <div class="subject-card">
-                    <div class="subject-name">${subject.name}</div>
-                    <div class="subject-value">${mark}</div>
+                  <div class="result-card">
+                    <div class="result-value">${mark}</div>
+                    <div class="result-subject">${subject.name}</div>
                   </div>
                 `;
               }
