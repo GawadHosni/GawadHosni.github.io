@@ -128,3 +128,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+const navContainer = document.querySelector('.nav-container');
+const toggleButton = document.querySelector('.mobile-menu-btn');
+
+toggleButton.addEventListener('click', () => {
+  navContainer.classList.toggle('active');
+});
