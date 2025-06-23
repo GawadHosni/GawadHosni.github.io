@@ -136,7 +136,7 @@ nav a:hover {
 
 /* Mobile Menu Button */
 .mobile-menu-btn {
-    display: none;
+    display: flex;
     background: var(--primary-color);
     color: white;
     border: none;
@@ -150,6 +150,8 @@ nav a:hover {
     border-radius: 4px;
     opacity: 1;
     visibility: visible;
+    justify-content: center
+
 }
 
 /* Header Scroll Effect */
