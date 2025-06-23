@@ -503,25 +503,7 @@ a, button, input, .btn {
         display: block;
     }
     
-    .nav-container {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--primary-color);
-        flex-direction: column;
-        padding: 10px 0;
-    }
-    
-    .nav-container.show {
-        display: flex;
-    }
-    
-    nav a {
-        margin: 5px 0;
-        padding: 10px 15px;
-    }
+ 
 }
 /* إضافة تأثير scroll لطيف للهيدر */
 header {
@@ -575,45 +557,48 @@ section:nth-child(odd) {
 /* تحسينات القائمة المنسدلة */
 @media (max-width: 1080px) {
   .nav-container {
-      background-color: var(--primary-color);
-      width: 100%;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out;
-      position: absolute;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      flex-wrap: wrap; /* نضيفها هنا */
-      justify-content: center; /* لتوسيط الأعمدة */
+    background-color: var(--primary-color);
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .nav-container.active {
-      max-height: 600px; /* تكفي لعرض كل الروابط */
-      padding: 1rem;
-      display: flex !important;
-      flex-direction: row; /* نخليها صف بدل عمودي */
-      flex-wrap: wrap;     /* تسمح بإنشاء صفوف متعددة */
-      gap: 10px;
-      justify-content: center;
+    max-height: 800px;
+    padding: 1rem;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: stretch;
   }
 
   .nav-container a {
-      flex: 0 0 45%; /* كل عنصر ياخد تقريبًا نصف عرض الحاوية */
-      padding: 0.8rem 1rem;
-      margin: 0;
-      color: white;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      font-family: 'Tajawal', sans-serif;
-      font-size: 13px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 6px;
-      transition: background 0.3s;
+    flex: 0 0 45%;
+    display: block;
+    padding: 0.8rem 1rem;
+    margin: 0;
+    color: white;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 13px;
+    background: rgba(255,255,255,0.05);
+    transition: background 0.3s;
   }
 
   .nav-container a:hover {
-      background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.15);
   }
 }
 
