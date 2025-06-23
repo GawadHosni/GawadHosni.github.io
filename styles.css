@@ -761,34 +761,3 @@ header, nav {
   border-radius: 6px;
   text-align: right;
 }
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.subject-card {
-  background: #f0f8ff;
-  border: 1px solid #d0e0f0;
-  border-radius: 12px;
-  padding: 1rem;
-  min-width: 130px;
-  max-width: 170px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  text-align: center;
-  transition: transform 0.3s;
-}
-.subject-card:hover {
-  transform: scale(1.05);
-}
-.subject-name {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #fff;
-}
-.subject-value {
-  font-size: 1.1rem;
-  color: #0066cc;
-}
