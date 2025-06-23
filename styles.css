@@ -618,7 +618,7 @@ header, nav {
 }
 }
 
-.refresh-news-btn {
+.refresh-news {
     background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
     border: none;
     color: rgb(255, 255, 255);
@@ -632,12 +632,12 @@ header, nav {
     user-select: none;
 }
 
-.refresh-news-btn:hover {
+.refresh-news:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 15px rgba(37, 117, 252, 0.6);
 }
 
-.refresh-news-btn:active {
+.refresh-news:active {
     transform: scale(0.95);
     box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
 }
