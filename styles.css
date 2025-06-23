@@ -618,8 +618,7 @@ header, nav {
 }
 }
 
-
-  .refresh-news-btn{
+.refresh-news-btn {
     background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
     border: none;
     color: rgb(255, 255, 255);
@@ -631,17 +630,17 @@ header, nav {
     box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     user-select: none;
-  }
+}
 
-  .refresh-news-btn:hover{
+.refresh-news-btn:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 15px rgba(37, 117, 252, 0.6);
-  }
+}
 
-  .refresh-news-btn:active {
+.refresh-news-btn:active {
     transform: scale(0.95);
     box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
-  }
+}
   /* إنجازات – ورثت معظم الخصائص من .card */
 .achievement-card .card-img {
   height: 160px;          /* أصغر قليلًا لتتلاءم مع الوصف */
