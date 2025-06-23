@@ -690,6 +690,7 @@
     <div id="result-container" style="text-align:center; margin-top:2rem;"></div>
   </div>
 </section>
+
 <script>
   const csvUrls = {
     "Grade 1": "grade1.csv",
@@ -853,45 +854,54 @@
           const studentName = row[nameIndex];
           const seatNumber = row[seatIndex];
 
-          let subjectsHtml = '<h4>النتائج:</h4><ul style="text-align:right; list-style:none; padding:0">';
-for (const subject of subjects) {
-  const mark = row[subject.index];
-  if (mark && mark.trim() !== '') {
-    if (grade === "Grade 7" || grade === "Grade 8") {
-      if (subject.name === "المجموع") {
-        const total = parseFloat(mark);
-        const totalMax = subject.max || 280;
-        const percentage = isNaN(total) ? "" : ` = ${(total / totalMax * 100).toFixed(1)}%`;
-        subjectsHtml += `<li>${subject.name}: ${mark} من ${totalMax}${percentage}</li>`;
-      } else if (subject.max) {
-        const score = parseFloat(mark);
-        subjectsHtml += `<li>${subject.name}: ${score} من ${subject.max}</li>`;
-      } else {
-        subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
-      }
-    } else {
-      // ابتدائي: تقييم فقط (لون أو وصف)
-      subjectsHtml += `<li>${subject.name}: ${mark}</li>`;
-    }
-  }
-}
-subjectsHtml += '</ul>';
+          let subjectsHtml = '<h4>النتائج:</h4><div class="cards-container">';
+          for (const subject of subjects) {
+            const mark = row[subject.index];
+            if (mark && mark.trim() !== '') {
+              if (grade === "Grade 7" || grade === "Grade 8") {
+                const score = parseFloat(mark);
+                if (subject.name === "المجموع") {
+                  const total = parseFloat(mark);
+                  const percentage = isNaN(total) ? "" : ` = ${(total / subject.max * 100).toFixed(1)}%`;
+                  subjectsHtml += `
+                    <div class="subject-card">
+                      <div class="subject-name">${subject.name}</div>
+                      <div class="subject-value">${total} من ${subject.max}${percentage}</div>
+                    </div>
+                  `;
+                } else {
+                  subjectsHtml += `
+                    <div class="subject-card">
+                      <div class="subject-name">${subject.name}</div>
+                      <div class="subject-value">${score} من ${subject.max}</div>
+                    </div>
+                  `;
+                }
+              } else {
+                subjectsHtml += `
+                  <div class="subject-card">
+                    <div class="subject-name">${subject.name}</div>
+                    <div class="subject-value">${mark}</div>
+                  </div>
+                `;
+              }
+            }
+          }
+          subjectsHtml += '</div>';
 
           function getArabicGradeName(grade) {
-  const gradeNumber = parseInt(grade.replace("Grade", ""));
-  const gradeNames = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];
-  
-  if (gradeNumber >= 1 && gradeNumber <= 6) {
-    return `الصف ${gradeNames[gradeNumber - 1]} الابتدائي`;
-  } else if (gradeNumber === 7) {
-    return "الصف الأول الإعدادي";
-  } else if (gradeNumber === 8) {
-    return "الصف الثاني الإعدادي";
-  } else {
-    return grade; // fallback
-  }
-}
-
+            const gradeNumber = parseInt(grade.replace("Grade", ""));
+            const gradeNames = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];
+            if (gradeNumber >= 1 && gradeNumber <= 6) {
+              return `الصف ${gradeNames[gradeNumber - 1]} الابتدائي`;
+            } else if (gradeNumber === 7) {
+              return "الصف الأول الإعدادي";
+            } else if (gradeNumber === 8) {
+              return "الصف الثاني الإعدادي";
+            } else {
+              return grade;
+            }
+          }
 
           container.innerHTML = `
             <h3>الاسم: ${studentName}</h3>
@@ -900,12 +910,12 @@ subjectsHtml += '</ul>';
             <p>النتيجة: ${status}</p>
             ${subjectsHtml}
             <h4>دليل الألوان للمرحلة الابتدائية :</h4>
-  <ul style="text-align: right; list-style: none; padding: 0;">
-    <li><span style="color: blue;">أزرق</span> = يفوق التوقعات دائماً</li>
-    <li><span style="color: green;">أخضر</span> = يلبي التوقعات</li>
-    <li><span style="color: goldenrod;">أصفر</span> = يلبي التوقعات أحياناً</li>
-    <li><span style="color: red;">أحمر</span> = أقل من المتوقع</li>
-  </ul>
+            <ul style="text-align: right; list-style: none; padding: 0;">
+              <li><span style="color: blue;">أزرق</span> = يفوق التوقعات دائماً</li>
+              <li><span style="color: green;">أخضر</span> = يلبي التوقعات</li>
+              <li><span style="color: goldenrod;">أصفر</span> = يلبي التوقعات أحياناً</li>
+              <li><span style="color: red;">أحمر</span> = أقل من المتوقع</li>
+            </ul>
           `;
           found = true;
           break;
