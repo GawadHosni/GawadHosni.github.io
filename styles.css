@@ -618,30 +618,23 @@ header, nav {
 }
 }
 
-.refresh-news-btn{
+.refresh-news-btn {
+    appearance: none; /* ✅ لإزالة شكل الزر الافتراضي */
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
-background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
-
-border: none;
-
-color: rgb(255, 255, 255);
-
-font-weight: 600;
-
-font-size: 1.1rem;
-
-padding: 0.6rem 1.8rem;
-
-border-radius: 30px;
-
-cursor: pointer;
-
-box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
-
-transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-user-select: none;
-
+    background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.6rem 1.8rem;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    user-select: none;
+    display: inline-block;
 }
 
 .refresh-news-btn:hover{
