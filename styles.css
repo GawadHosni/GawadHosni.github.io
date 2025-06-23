@@ -585,7 +585,7 @@ section:nth-child(odd) {
     opacity: 1;
     padding: 1rem 0;
     pointer-events: auto;
-    margin-top: 100px; /* ✅ ضيفها هنا بدلًا من فوق */
+    margin-top: 40px; /* ✅ ضيفها هنا بدلًا من فوق */
   }
 
   .nav-container a {
