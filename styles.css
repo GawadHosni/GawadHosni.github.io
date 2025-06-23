@@ -618,8 +618,8 @@ header, nav {
 }
 }
 
-.refresh-news-btn {
-    appearance: none; /* ✅ لإزالة شكل الزر الافتراضي */
+.refresh-news-btn{
+    appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
 
@@ -634,9 +634,10 @@ header, nav {
     box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     user-select: none;
-    display: inline-block;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
 }
-
 .refresh-news-btn:hover{
 
 transform: scale(1.05);
