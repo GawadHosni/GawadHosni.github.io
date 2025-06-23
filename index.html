@@ -433,108 +433,243 @@
   <div id="news-container"></div>
 </section>
 
-<script>
-  const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
-
-  function parseCSV(content) {
-    const rows = [];
-    const lines = content.split('\n');
-    let currentRow = '';
-    let insideQuotes = false;
-
-    for (let line of lines) {
-      if (!insideQuotes) {
-        currentRow = line;
+<script>  
+  const csvUrls = {  
+    "Grade 1": "grade1.csv",  
+    "Grade 2": "grade2.csv",  
+    "Grade 3": "grade3.csv",  
+    "Grade 4": "grade4.csv",  
+    "Grade 5": "grade5.csv",  
+    "Grade 6": "grade6.csv",  
+    "Grade 7": "results.csv",  
+    "Grade 8": "results2.csv",  
+  };  
+  
+  async function fetchCSV(url) {  
+    const res = await fetch(url);  
+    const text = await res.text();  
+    return text.trim().split('\n').map(line => line.split(','));  
+  }  
+  
+  async function searchResult() {  
+    const id = document.getElementById('student-id').value.trim();  
+    const container = document.getElementById('result-container');  
+    container.innerHTML = '';  
+  
+    if (!id || id.length < 10) {  
+      container.innerText = 'الرجاء إدخال الرقم القومي بشكل صحيح.';  
+      return;  
+    }  
+  
+    let found = false;  
+  
+    for (const [grade, url] of Object.entries(csvUrls)) {  
+      const rows = await fetchCSV(url);  
+      for (let i = 1; i < rows.length; i++) {  
+        const row = rows[i];  
+        let nationalIdIndex, nameIndex, seatIndex, status = "-", statusIndex = null, subjects = [];  
+  
+        switch (grade) {  
+          case "Grade 1":  
+          case "Grade 2":  
+            nationalIdIndex = 3;  
+            nameIndex = 1;  
+            seatIndex = 2;  
+            status = row[5];  
+            subjects = [  
+              { name: "اللغة العربية", index: 6 },  
+              { name: "اللغة الإنجليزية", index: 8 },  
+              { name: "الرياضيات", index: 10 },  
+              { name: "متعدد التخصصات", index: 12 },  
+              { name: "تربية بدنية و صحية", index: 14 },  
+              { name: "تربية دينية", index: 16 },  
+              { name: "القيم و احترام الآخر", index: 18 },  
+              { name: "مستوى رفيع", index: 20 },  
+              { name: "توكاتسو", index: 22 },  
+            ];  
+            break;  
+  
+          case "Grade 3":  
+            nationalIdIndex = 2;  
+            nameIndex = 1;  
+            seatIndex = 3;  
+            status = row[4];  
+            subjects = [  
+              { name: "اللغة العربية", index: 5 },  
+              { name: "اللغة الإنجليزية", index: 7 },  
+              { name: "الرياضيات", index: 9 },  
+              { name: "متعدد التخصصات", index: 11 },  
+              { name: "المجموع الكلي", index: 19 },  
+              { name: "مستوى رفيع", index: 21 },  
+              { name: "تربية دينية", index: 23 },  
+              { name: "تربية بدنية و صحية", index: 25 },  
+              { name: "القيم و احترام الآخر", index: 27 },  
+              { name: "توكاتسو", index: 31 },  
+            ];  
+            break;  
+  
+          case "Grade 4":  
+          case "Grade 5":  
+          case "Grade 6":  
+            nationalIdIndex = 2;  
+            nameIndex = 1;  
+            seatIndex = 3;  
+            status = row[4];  
+            subjects = [  
+              { name: "اللغة العربية", index: 5 },  
+              { name: "الرياضيات", index: 7 },  
+              { name: "الدراسات", index: 9 },  
+              { name: "العلوم", index: 11 },  
+              { name: "اللغة الإنجليزية", index: 13 },  
+              { name: "ICT", index: 15 },  
+              { name: "مهارات مهنية", index: 17 },  
+              { name: "المجموع الكلي", index: 19 },  
+              { name: "مستوى رفيع", index: 21 },  
+              { name: "تربية دينية", index: 23 },  
+              { name: "تربية فنية", index: 25 },  
+              { name: "تربية رياضية", index: 27 },  
+              { name: "تربية موسيقية", index: 29 },  
+              { name: "توكاتسو", index: 31 },  
+              { name: "القيم و احترام الآخر", index: 33 },  
+            ];  
+            break;  
+  
+          case "Grade 7":  
+            nationalIdIndex = 7;  
+            nameIndex = 6;  
+            seatIndex = 5;  
+            statusIndex = 26;  
+            status = {  
+              1: "ناجح",  
+              2: "دور ثانٍ",  
+              3: "راسب"  
+            }[parseInt(row[statusIndex])] || "غير معروف";  
+            subjects = [  
+              { name: "اللغة العربية", index: 11, max:80 },  
+              { name: "اللغة الإنجليزية", index: 12, max:60 },  
+              { name: "الدراسات الاجتماعية", index: 13, max:40 },  
+              { name: "الرياضيات", index: 14, max:60 },  
+              { name: "العلوم", index: 15, max:40 },  
+              { name: "المجموع", index: 16, max:280 },  
+              { name: "التربية الدينية", index: 17, max:40 },  
+              { name: "التربية الرياضية", index: 18, max:40 },  
+              { name: "التربية الفنية", index: 19, max:20 },  
+              { name: "التربية الموسيقية", index: 20, max:40 },  
+              { name: "الحاسب الآلي", index: 21, max:20 },  
+              { name: "النشاط الاختياري 1", index: 22, max:20 },  
+              { name: "النشاط الاختياري 2", index: 23, max:20 },  
+              { name: "المستوى الرفيع", index: 24, max:50 },  
+              { name: "المستوى الرفيع (2)", index: 25, max:40 },  
+            ];  
+            break;  
+  
+          case "Grade 8":  
+            nationalIdIndex = 7;  
+            nameIndex = 6;  
+            seatIndex = 5;  
+            statusIndex = 24;  
+            status = {  
+              1: "ناجح",  
+              2: "دور ثانٍ",  
+              3: "راسب"  
+            }[parseInt(row[statusIndex])] || "غير معروف";  
+            subjects = [  
+              { name: "اللغة العربية", index: 11, max:80},  
+              { name: "اللغة الإنجليزية", index: 12, max:60 },  
+              { name: "الدراسات الاجتماعية", index: 13, max:40 },  
+              { name: "الرياضيات", index: 14, max:60 },  
+              { name: "العلوم", index: 15, max:40 },  
+              { name: "المجموع", index: 16, max:280 },  
+              { name: "التربية الدينية", index: 17, max:40 },  
+              { name: "التربية الفنية", index: 18, max:20 },  
+              { name: "الحاسب الآلي", index: 19, max:20 },  
+              { name: "النشاط الاختياري 1", index: 20, max:20 },  
+              { name: "النشاط الاختياري 2", index: 21, max:20 },  
+              { name: "المستوى الرفيع", index: 22, max:50 },  
+              { name: "المستوى الرفيع (2)", index: 23, max:40 },  
+            ];  
+            break;  
+        }  
+  
+        const nationalId = row[nationalIdIndex]?.replace(/\uFEFF/g, '').trim();  
+        if (nationalId === id) {  
+          const studentName = row[nameIndex];  
+          const seatNumber = row[seatIndex];  
+  
+          let subjectsHtml = '<h4>النتائج:</h4><div class="result-cards-container">';
+for (const subject of subjects) {
+  const mark = row[subject.index];
+  if (mark && mark.trim() !== '') {
+    if (grade === "Grade 7" || grade === "Grade 8") {
+      const score = parseFloat(mark);
+      if (subject.name === "المجموع") {
+        const total = parseFloat(mark);
+        const percentage = isNaN(total) ? "" : ` = ${(total / subject.max * 100).toFixed(1)}%`;
+        subjectsHtml += `
+          <div class="result-card">
+            <div class="result-value">${total} / ${subject.max}<br><small>${percentage}</small></div>
+            <div class="result-subject">${subject.name}</div>
+          </div>
+        `;
       } else {
-        currentRow += '\n' + line;
+        subjectsHtml += `
+          <div class="result-card">
+            <div class="result-value">${score} / ${subject.max}</div>
+            <div class="result-subject">${subject.name}</div>
+          </div>
+        `;
       }
-
-      const quoteCount = (currentRow.match(/"/g) || []).length;
-      insideQuotes = quoteCount % 2 !== 0;
-
-      if (!insideQuotes) {
-        rows.push(parseCSVLine(currentRow));
-      }
+    } else {
+      subjectsHtml += `
+        <div class="result-card">
+          <div class="result-value">${mark}</div>
+          <div class="result-subject">${subject.name}</div>
+        </div>
+      `;
     }
-    return rows;
   }
-
-  function parseCSVLine(line) {
-    const result = [];
-    let current = '';
-    let inQuotes = false;
-
-    for (let i = 0; i < line.length; i++) {
-      const char = line[i];
-      if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
-        inQuotes = !inQuotes;
-      } else if (char === ',' && !inQuotes) {
-        result.push(current.trim().replace(/^"|"$/g, ''));
-        current = '';
-      } else {
-        current += char;
-      }
-    }
-    result.push(current.trim().replace(/^"|"$/g, ''));
-    return result;
-  }
-
-  function fetchNews() {
-    const csvUrl = baseCsvUrl + '&cacheBuster=' + new Date().getTime();
-    fetch(csvUrl)
-      .then(response => response.text())
-      .then(text => {
-        const lines = parseCSV(text.trim());
-        const container = document.getElementById('news-container');
-        container.innerHTML = '';
-
-        const newsItems = [];
-
-        for (let i = 1; i < lines.length; i++) {
-          const cols = lines[i];
-          const date = cols[1] || '';
-          const title = cols[2] || '';
-          const description = cols[3] || '';
-          const link = cols[4] || '';
-
-          // فقط تجاهل الأخبار اللي فعلاً فاضية تمامًا
-          if (title.trim() && description.trim()) {
-            newsItems.push({ date, title, description, link });
-          }
-        }
-
-        newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        if (newsItems.length === 0) {
-          container.innerHTML = '<p style="text-align: center;">لا توجد أخبار حالياً.</p>';
-          return;
-        }
-
-        newsItems.forEach(({ date, title, description, link }) => {
-          const newsItem = document.createElement('div');
-          newsItem.classList.add('news-item');
-
-          const linkHtml = link.trim()
-            ? `<a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>`
-            : '';
-
-          newsItem.innerHTML = `
-            <div class="news-date">${date}</div>
-            <h3>${title}</h3>
-            <p>${description.replace(/\n/g, '<br>')}</p>
-            ${linkHtml}
-          `;
-          container.appendChild(newsItem);
-        });
-      })
-      .catch(err => {
-        console.error('خطأ في تحميل الأخبار:', err);
-        document.getElementById('news-container').innerText = 'فشل في تحميل الأخبار.';
-      });
-  }
-
-  fetchNews();
-  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
+}
+subjectsHtml += '</div>';  
+  
+          function getArabicGradeName(grade) {  
+            const gradeNumber = parseInt(grade.replace("Grade", ""));  
+            const gradeNames = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس"];  
+            if (gradeNumber >= 1 && gradeNumber <= 6) {  
+              return `الصف ${gradeNames[gradeNumber - 1]} الابتدائي`;  
+            } else if (gradeNumber === 7) {  
+              return "الصف الأول الإعدادي";  
+            } else if (gradeNumber === 8) {  
+              return "الصف الثاني الإعدادي";  
+            } else {  
+              return grade;  
+            }  
+          }  
+  
+          container.innerHTML = `  
+            <h3>الاسم: ${studentName}</h3>  
+            <p>الصف: ${getArabicGradeName(grade)}</p>  
+            <p>رقم الجلوس: ${seatNumber}</p>  
+            <p>النتيجة: ${status}</p>  
+            ${subjectsHtml}  
+            <h4>دليل الألوان للمرحلة الابتدائية :</h4>  
+            <ul style="text-align: right; list-style: none; padding: 0;">  
+              <li><span style="color: blue;">أزرق</span> = يفوق التوقعات دائماً</li>  
+              <li><span style="color: green;">أخضر</span> = يلبي التوقعات</li>  
+              <li><span style="color: goldenrod;">أصفر</span> = يلبي التوقعات أحياناً</li>  
+              <li><span style="color: red;">أحمر</span> = أقل من المتوقع</li>  
+            </ul>  
+          `;  
+          found = true;  
+          break;  
+        }  
+      }  
+      if (found) break;  
+    }  
+  
+    if (!found) {  
+      container.innerHTML = '<p>لم يتم العثور على الطالب بهذا الرقم القومي.</p>';  
+    }  
+  }  
 </script>
 
 
