@@ -570,7 +570,6 @@ section:nth-child(odd) {
     padding: 0;
     transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
     position: absolute;
-    top: 100%;
     left: 0;
     right: 0;
     z-index: 1000;
@@ -618,14 +617,11 @@ header, nav {
 }
 }
 
-.refresh-news-btn{
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
 
+  .refresh-news-btn{
     background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
     border: none;
-    color: white;
+    color: rgb(255, 255, 255);
     font-weight: 600;
     font-size: 1.1rem;
     padding: 0.6rem 1.8rem;
@@ -634,25 +630,17 @@ header, nav {
     box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     user-select: none;
-    text-align: center;
-    outline: none;
-    text-decoration: none;
-}
-.refresh-news-btn:hover{
+  }
 
-transform: scale(1.05);
+  .refresh-news-btn:hover{
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(37, 117, 252, 0.6);
+  }
 
-box-shadow: 0 6px 15px rgba(37, 117, 252, 0.6);
-
-}
-
-.refresh-news-btn:active {
-
-transform: scale(0.95);
-
-box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
-
-}
+  .refresh-news-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
+  }
   /* إنجازات – ورثت معظم الخصائص من .card */
 .achievement-card .card-img {
   height: 160px;          /* أصغر قليلًا لتتلاءم مع الوصف */
@@ -804,51 +792,4 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
 .result-subject {
   font-size: 0.85rem;
   color: #333;
-}
-.refresh-news-btn {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
-    border: none;
-    color: white;
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 0.6rem 1.8rem;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(37, 117, 252, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    user-select: none;
-    text-align: center;
-    outline: none;
-    text-decoration: none;
-}
-
-.refresh-news-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(37, 117, 252, 0.6);
-}
-
-.refresh-news-btn:active {
-    transform: scale(0.95);
-    box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
-}
-
-.news-item {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-}
-
-.news-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.news-date {
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 0.3rem;
 }

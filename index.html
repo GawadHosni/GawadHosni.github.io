@@ -426,11 +426,12 @@
   <h2 class="section-title">أخبار المدرسة</h2>
 
   <!-- زر تحديث الأخبار -->
-  <button class="refresh-news-btn">تحديث الأخبار</button>
-  <br><br>
-
-  <div id="news-container"></div>  
-</section>  
+  <button id="refresh-news-btn" class="refresh-news-btn">تحديث الأخبار
+  </button>
+  <br>
+  <br>
+  <div id="news-container"></div>
+</section>
 <script>
   const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
 
@@ -495,6 +496,7 @@
           const description = cols[3] || '';
           const link = cols[4] || '';
 
+          // فقط تجاهل الأخبار اللي فعلاً فاضية تمامًا
           if (title.trim() && description.trim()) {
             newsItems.push({ date, title, description, link });
           }
