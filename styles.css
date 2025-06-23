@@ -71,7 +71,7 @@ a, button, input, .btn {
 }
 
 /* =============================================
-   4. Header & Navigation
+   4. Header & Navigation - UPDATED VERSION
    ============================================= */
 header {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -100,10 +100,10 @@ header {
     display: block;
 }
 
-/* Navigation */
+/* Navigation - CENTERED VERSION */
 nav {
     background-color: var(--primary-color);
-    padding: 0.5rem 0;
+    padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 1001;
@@ -113,30 +113,45 @@ nav {
 .nav-container {
     display: flex;
     justify-content: center;
-    max-width: 1000px;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
     font-family: "Tajawal", sans-serif;
+    gap: 0.5rem;
 }
 
 nav a {
     color: white;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    margin: 0 0.3rem;
-    font-weight: 500;
-    border-radius: 4px;
+    padding: 0.8rem 1.5rem;
+    margin: 0.2rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
     transition: var(--transition-default);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    min-width: 120px;
+    font-size: 1rem;
 }
 
 nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+nav a:active {
+    transform: translateY(0);
 }
 
 /* Mobile Menu Button */
 .mobile-menu-btn {
-    display: flex;
+    display: none;
     background: var(--primary-color);
     color: white;
     border: none;
@@ -150,8 +165,7 @@ nav a:hover {
     border-radius: 4px;
     opacity: 1;
     visibility: visible;
-    justify-content: center
-
+    right: 1rem;
 }
 
 /* Header Scroll Effect */
@@ -587,7 +601,7 @@ footer {
 }
 
 /* =============================================
-   12. Responsive Design - Tablet
+   12. Responsive Design - Tablet - UPDATED
    ============================================= */
 @media (max-width: 1080px) {
     .nav-container {
@@ -603,38 +617,49 @@ footer {
         left: 0;
         right: 0;
         z-index: 1000;
-        flex-wrap: wrap;
-        justify-content: space-around;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         pointer-events: none;
+        gap: 0.5rem;
     }
 
     .nav-container.active {
         max-height: 600px;
         opacity: 1;
-        padding: 1rem 0;
+        padding: 1.5rem 0;
         pointer-events: auto;
         margin-top: 0;
     }
 
     .nav-container a {
         display: block;
-        width: 45%;
-        padding: 0.8rem 1rem;
-        margin: 5px;
+        width: 200px;
+        padding: 1rem;
+        margin: 0.3rem 0;
         color: white;
         text-align: center;
-        border: 1px solid rgba(255,255,255,0.1);
-        font-size: 12px;
+        border: 1px solid rgba(255,255,255,0.2);
+        font-size: 1rem;
         border-radius: var(--border-radius);
-        background-color: rgba(255,255,255,0.05);
-        transition: background 0.3s ease;
+        background: rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
         opacity: 1;
         visibility: visible;
+    }
+
+    .nav-container a:hover {
+        background: rgba(255,255,255,0.2);
+        transform: scale(1.05);
+    }
+
+    .mobile-menu-btn {
+        display: block;
     }
 }
 
 /* =============================================
-   13. Responsive Design - Mobile
+   13. Responsive Design - Mobile - UPDATED
    ============================================= */
 @media (max-width: 768px) {
     body {
@@ -662,16 +687,21 @@ footer {
         display: block;
     }
 
-    /* Navigation */
+    /* Navigation for Mobile */
     .nav-container {
-        flex-wrap: wrap;
-        padding: 0.5rem;
+        flex-direction: column;
+        gap: 0.3rem;
     }
 
-    nav a {
-        padding: 0.3rem 0.5rem;
-        margin: 0.1rem;
-        font-size: 0.85rem;
+    .nav-container a {
+        width: 180px;
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        min-width: auto;
+    }
+
+    nav {
+        padding: 0.8rem 0;
     }
 
     /* Sections */
@@ -742,6 +772,14 @@ footer {
     /* Iframes */
     iframe {
         height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container a {
+        width: 160px;
+        padding: 0.7rem 0.8rem;
+        font-size: 0.85rem;
     }
 }
 
