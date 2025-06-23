@@ -570,6 +570,7 @@ section:nth-child(odd) {
     padding: 0;
     transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
     position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
     z-index: 1000;
