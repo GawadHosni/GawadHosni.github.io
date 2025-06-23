@@ -497,6 +497,11 @@ a, button, input, .btn {
     z-index: 1001;
     border-radius: 4px;
 }
+.mobile-menu-btn {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1002; /* أعلى من nav-container */
+}
 
 @media (max-width: 768px) {
     .mobile-menu-btn {
