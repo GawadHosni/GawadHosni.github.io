@@ -776,11 +776,11 @@ header, nav {
   width: 110px;
   padding: 0.6rem;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 7px rgba(0,0,0,0.05);
   transition: transform 0.2s;
 }
 .result-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .result-value {
