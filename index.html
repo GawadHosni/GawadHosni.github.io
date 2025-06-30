@@ -544,8 +544,10 @@
       });
   }
 
+window.addEventListener('DOMContentLoaded', () => {
   fetchNews();
-  document.getElementById('refresh-news-btn').addEventListener('click', () => fetchNews());
+  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
+});
 </script>
 
 
