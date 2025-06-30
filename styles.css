@@ -616,7 +616,7 @@ header, nav {
     opacity: 1 !important;
     visibility: visible !important;
 }
-}
+
 
 .refresh-news-btn{
     appearance: none;
@@ -851,4 +851,13 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
     font-size: 0.85rem;
     color: #666;
     margin-bottom: 0.3rem;
+}
+@media (min-width: 1081px) {
+  .nav-container {
+    flex-wrap: nowrap; /* 🛠 تمنع العناصر من الانتقال لسطر جديد */
+  }
+
+  .nav-container a {
+    white-space: nowrap; /* 🛠 تمنع التفاف الكلمات زي "من نحن" */
+  }
 }
