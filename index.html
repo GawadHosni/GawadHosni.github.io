@@ -420,17 +420,18 @@
 </div>
 </section>
 
-        <!-- قسم الأخبار -->
+ <!-- قسم الأخبار -->
 <section id="news" class="fade-in">
   <br><br>
   <h2 class="section-title">أخبار المدرسة</h2>
 
   <!-- زر تحديث الأخبار -->
-  <button class="refresh-news-btn">تحديث الأخبار</button>
+  <button id="refresh-news-btn" class="refresh-news-btn">تحديث الأخبار</button>
   <br><br>
 
   <div id="news-container"></div>  
 </section>  
+
 <script>
   const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
 
@@ -477,7 +478,7 @@
     return result;
   }
 
-  function fetchNews() {
+  function fetchNews(limit = 4) {
     const csvUrl = baseCsvUrl + '&cacheBuster=' + new Date().getTime();
     fetch(csvUrl)
       .then(response => response.text())
@@ -507,7 +508,9 @@
           return;
         }
 
-        newsItems.forEach(({ date, title, description, link }) => {
+        const itemsToShow = limit ? newsItems.slice(0, limit) : newsItems;
+
+        itemsToShow.forEach(({ date, title, description, link }) => {
           const newsItem = document.createElement('div');
           newsItem.classList.add('news-item');
 
@@ -523,6 +526,17 @@
           `;
           container.appendChild(newsItem);
         });
+
+        // زر "عرض جميع الأخبار"
+        if (limit && newsItems.length > limit) {
+          const moreBtn = document.createElement('div');
+          moreBtn.innerHTML = `
+            <div style="text-align:center; margin-top: 1rem;">
+              <a href="all-news.html" class="refresh-news-btn">عرض جميع الأخبار</a>
+            </div>
+          `;
+          container.appendChild(moreBtn);
+        }
       })
       .catch(err => {
         console.error('خطأ في تحميل الأخبار:', err);
@@ -531,8 +545,10 @@
   }
 
   fetchNews();
-  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
+  document.getElementById('refresh-news-btn').addEventListener('click', () => fetchNews());
 </script>
+
+
 
 
 
@@ -570,40 +586,18 @@
             <br>
             <h2 class="section-title">الطلاب المتفوقون</h2>
             <div style="text-align:center;">
-                <img src="students.jpg" alt="الطلاب المتفوقون" style="max-width:100%; border-radius:8px; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
-                <p style="margin-top:1rem;">نفخر في مدرستنا بالطلاب المتفوقين الذين يمثلون نموذجًا للجد والاجتهاد. يتم تكريم المتفوقين شهريًا في الطابور المدرسي ومن خلال نشر أسمائهم في هذا القسم.</p>
+              <h3>سيتم نشر صور المتفوقين خلال العام الدراسي الجديد</h2>
+              <p style="margin-top:1rem;">نفخر في مدرستنا بالطلاب المتفوقين الذين يمثلون نموذجًا للجد والاجتهاد. يتم تكريم المتفوقين اسبوعيا في الطابور المدرسي ومن خلال نشر أسمائهم في هذا القسم.</p>
             </div>
         </section>
         <!-- قسم الطلاب المشاغبين -->
         <section id="discipline" class="fade-in">
     <br><br>
     <h2 class="section-title">قسم المشاغبين</h2>
+    <h3 style="text-align:center; margin-bottom: 20px;">سيتم نشر اسماء الطلاب المشاغبين خلال العام الدراسي الجديد</h3>
     <p style="text-align:center; margin-bottom: 20px;">يُستخدم هذا القسم لتوثيق أسماء الطلاب المخالفين، وفصولهم، والعقوبات المقررة عليهم.</p>
 
-    <div style="overflow-x:auto;">
-        <table border="1" style="width:100%; border-collapse: collapse; text-align: center;">
-            <thead style="background-color: #f2f2f2;">
-                <tr>
-                    <th>الاسم</th>
-                    <th>الفصل</th>
-                    <th>العقوبة</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <!-- أضف طلاب آخرين هنا -->
-            </tbody>
-        </table>
-    </div>
+
 </section>
 
         <!-- قسم الإنجازات -->
@@ -1133,5 +1127,7 @@ subjectsHtml += '</div>';
     <a href="#" class="back-to-top" aria-label="العودة إلى الأعلى">
         <i class="fas fa-arrow-up"></i>
     </a>
+
+    
 </body>
 </html>
