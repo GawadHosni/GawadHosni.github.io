@@ -861,3 +861,37 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
     white-space: nowrap; /* 🛠 تمنع التفاف الكلمات زي "من نحن" */
   }
 }
+.mutaz-style-ad {
+  width: 200px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  background-color: #fff;
+  border: 3px solid black;
+}
+
+.mutaz-style-ad:hover {
+  transform: scale(1.03);
+}
+
+.mutaz-style-ad img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: none;
+}
+
+/* ✅ تصغير الإعلان على الشاشات الصغيرة */
+@media (max-width: 600px) {
+  .mutaz-style-ad {
+    width: 140px;
+    margin: 1rem auto;
+    border: 3px solid black;
+    border-top: 6px solid black;
+  }
+}
+
+
+

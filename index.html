@@ -84,7 +84,16 @@
             <a href="#contact">اتصل بنا</a>
         </div>
     </nav>
-    
+<!-- إعلان بانر بسيط -->
+<div class="mutaz-style-ad">
+  <a href="#" target="_blank">
+    <img src="me.jpg" alt="إعلان" loading="lazy">
+  </a>
+</div>
+
+
+
+
     <!-- القسم الرئيسي -->
     <main>
         <!-- قسم من نحن -->
@@ -169,6 +178,16 @@
                         <h3 class="card-title">معرض العلوم</h3>
                         <p class="card-text">إبداعات طلابية في معرض العلوم الاسبوعي بالمدرسة</p>
                     </div>
+                </div>
+                <div class="card">
+                    <a href="deu.jpg" data-lightbox="gallery" data-title="النشاط الصيفي لللغة الالمانية">
+                        <img src="deu.jpg" alt="النشاط الصيفي لللغة الالمانية" class="card-img" class="lazy-load">
+                    </a>
+                    <div class="card-body">
+                        <h3 class="card-title">النشاط الصيفي لللغة الالمانية</h3>
+                        <p class="card-text">النشاط الصيفي لللغة الالمانية الذي يقام في المدرسة كل عام بقيادة فراو علا</p>
+                        <a href="https://www.facebook.com/gawadhosniels/posts/pfbid0gJvBSLseBD53TeV3FFwAG7zbCmnkR3PGeEHLAs7rsLbGoCAycADYa7E3VFrxJhaol" class="btn">المزيد من الصور</a>
+                      </div>
                 </div>
             </div>
         </section>
@@ -544,10 +563,8 @@
       });
   }
 
-window.addEventListener('DOMContentLoaded', () => {
   fetchNews();
-  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
-});
+  document.getElementById('refresh-news-btn').addEventListener('click', () => fetchNews());
 </script>
 
 
