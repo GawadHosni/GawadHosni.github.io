@@ -892,6 +892,14 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
     border-top: 6px solid black;
   }
 }
+.text{
+    background-color: rgb(255, 0, 0);
+    height: 25px;
+    color: rgb(255, 255, 255);
+    direction: rtl;
+    text-align: center;
+}
 
 
 
+ 
