@@ -570,26 +570,93 @@
         <section id="events" class="fade-in">
             <br>
             <br>
-            <h2 class="section-title">المواعيد الهامة</h2>
-            
-            <div class="event">
-                <h3>امتحانات  الدور الثاني لصفوف النقل </h3>
-                <p class="event-date">26 يوليو 2025</p>
-                <p>تبدأ امتحانات  الدور الثاني لجميع صفوف النقل</p>
-            </div>
-            
-            <div class="event">
-                <h3>امتحانات الدور الثاني للشهادة الاعدادية</h3>
-                <p class="event-date">3 اغسطس 2025</p>
-                <p>تبدأ امتحانات الدور الثاني للصف الثالث الإعدادي</p>
-            </div>
-            
-            <div class="event">
-                <h3>انطلاق العام الدراسي الجديد 2025/2026</h3>
-                <p class="event-date">20 سبتمبر 2025</p>
-                <p>بداية العام الدراسي الجديد 2025/2026</p>
-            </div>
-        </section>
+ <section id="countdown" class="important-dates">
+  <h2 class="section-title">العد التنازلي لبداية العام الدراسي</h2>
+  <div id="timer" class="timer-box">
+    <div><span id="days">00</span><p>يوم</p></div>
+    <div><span id="hours">00</span><p>ساعة</p></div>
+    <div><span id="minutes">00</span><p>دقيقة</p></div>
+    <div><span id="seconds">00</span><p>ثانية</p></div>
+  </div>
+  <div id="message" class="message"></div>
+</section>
+
+<style>
+/* تنسيق القسم */
+#important-dates, #countdown {
+  text-align: center;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* شكل العداد */
+.timer-box {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.timer-box div {
+  background: #002147; /* الأزرق الداكن */
+  color: #FFD700; /* ذهبي */
+  padding: 15px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  min-width: 70px;
+}
+
+.timer-box span {
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
+  color: #fff; /* الأبيض */
+}
+
+.timer-box p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  color: #FFD700;
+}
+
+/* الرسالة النهائية */
+.message {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #002147;
+}
+</style>
+
+<script>
+// التاريخ المستهدف
+var countDownDate = new Date("Sep 20, 2025 07:00:00").getTime();
+
+// تحديث العداد كل ثانية
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+
+  // حساب الأيام والساعات والدقائق والثواني
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // عرض النتائج
+  document.getElementById("days").innerHTML = days;
+  document.getElementById("hours").innerHTML = hours;
+  document.getElementById("minutes").innerHTML = minutes;
+  document.getElementById("seconds").innerHTML = seconds;
+
+  // لما يخلص العداد
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer").style.display = "none";
+    document.getElementById("message").innerHTML = "🎉 بداية العام الدراسي الجديد 2025/2026";
+  }
+}, 1000);
+</script>
         
         <!-- قسم الطلاب المتفوقون -->
         <section id="students" class="fade-in">
