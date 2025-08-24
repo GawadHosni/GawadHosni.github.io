@@ -959,15 +959,15 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
 }
 
 .timer-box div {
-  background: #002147; /* الأزرق الداكن */
+  background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
   color: #FFD700; /* ذهبي */
   padding: 15px 20px;
-  border-radius: 20px;
+  border-radius: 15px;
   min-width: 70px;
 }
 
 .timer-box span {
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: bold;
   display: block;
   color: #fff; /* الأبيض */
