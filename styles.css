@@ -959,7 +959,7 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
 }
 
 .timer-box div {
-  background: linear-gradient(135deg, #ffee00 0%, #5486dd 100%);
+  background: #002147;
   color: #FFD700; /* ذهبي */
   padding: 15px 20px;
   border-radius: 15px;
@@ -975,8 +975,8 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
 
 .timer-box p {
   margin: 5px 0 0;
-  font-size: 0.9rem;
-  color: #fff;
+  font-size: 1rem;
+  color: #FFD700;
 }
 
 /* الرسالة النهائية */
