@@ -55,12 +55,12 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body style="background-color: #004080;">
+<body class="background">
     <!-- الهيدر -->
     <header>
             <img src="schoollogo.jpg" alt="شعار مدرسة جواد حسني" class="school-logo" class="lazy-load">
             <h1 style="color: white;">مدرسة جواد حسني الرسمية لغات</h1>
-            <br>   
+            <br>
     </header>
     
     
@@ -85,7 +85,7 @@
         </div>
     </nav>
 <br>
-<h5 class="text">عاجل : استعدادا للعام الدراسي الجديد 2025/2026 تم تحديث كافة اقسام الموقع</h5>
+<h5 class="text">عاجل : تم تحديث كافة اقسام الموقع استعدادا للعام الدراسي الجديد 2025/2026</h5>
     <!-- القسم الرئيسي -->
     <main>
         <!-- قسم من نحن -->
@@ -567,8 +567,7 @@
 
         
         <!-- قسم المواعيد الهامة -->
-        <section id="events" class="fade-in">
-            <br>
+<section id="events" class="fade-in">
             <br>
             <h2 class="section-title">العد التنازلي لبداية العام الدراسي</h2>
  <section id="countdown" class="important-dates">
@@ -579,86 +578,9 @@
     <div><span id="days">00</span><p>يوم</p></div>
   </div>
   <div id="message" class="message"></div>
+ </section>
 </section>
 
-<style>
-/* تنسيق القسم */
-#important-dates, #countdown {
-  text-align: center;
-  margin: 40px auto;
-  padding: 20px;
-}
-
-/* شكل العداد */
-.timer-box {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
-}
-
-.timer-box div {
-  background: #002147; /* الأزرق الداكن */
-  color: #FFD700; /* ذهبي */
-  padding: 15px 20px;
-  border-radius: 15px;
-  min-width: 70px;
-}
-
-.timer-box span {
-  font-size: 2rem;
-  font-weight: bold;
-  display: block;
-  color: #fff; /* الأبيض */
-}
-
-.timer-box p {
-  margin: 5px 0 0;
-  font-size: 0.9rem;
-  color: #FFD700;
-}
-
-/* الرسالة النهائية */
-.message {
-  margin-top: 20px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #002147;
-}
-</style>
-
-<script>
-// التاريخ المستهدف
-var countDownDate = new Date("Sep 20, 2025 07:00:00").getTime();
-
-// تحديث العداد كل ثانية
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
-
-  // حساب الأيام والساعات والدقائق والثواني
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  // عرض النتائج
-  document.getElementById("days").innerHTML = days;
-  document.getElementById("hours").innerHTML = hours;
-  document.getElementById("minutes").innerHTML = minutes;
-  document.getElementById("seconds").innerHTML = seconds;
-
-  // لما يخلص العداد
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer").style.display = "none";
-    document.getElementById("message").innerHTML = "🎉 بداية العام الدراسي الجديد 2025/2026";
-  }
-}, 1000);
-</script>
-</section>
-
-        
         <!-- قسم الطلاب المتفوقون -->
         <section id="students" class="fade-in">
             <br>
@@ -1168,7 +1090,7 @@ subjectsHtml += '</div>';
     </main>
     
     <!-- الفوتر -->
-    <footer>
+    <footer class="background">
         <div class="social-links">
             <a href="https://www.facebook.com/gawadhosniels/?locale=ar_AR" aria-label="فيسبوك">
                 <i class="fab fa-facebook"></i>

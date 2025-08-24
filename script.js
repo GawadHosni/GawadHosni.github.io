@@ -123,3 +123,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+// التاريخ المستهدف
+var countDownDate = new Date("Sep 20, 2025 07:00:00").getTime();
+
+// تحديث العداد كل ثانية
+var x = setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+
+  // حساب الأيام والساعات والدقائق والثواني
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // عرض النتائج
+  document.getElementById("days").innerHTML = days;
+  document.getElementById("hours").innerHTML = hours;
+  document.getElementById("minutes").innerHTML = minutes;
+  document.getElementById("seconds").innerHTML = seconds;
+
+  // لما يخلص العداد
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("timer").style.display = "none";
+    document.getElementById("message").innerHTML = "🎉 بداية العام الدراسي الجديد 2025/2026";
+  }
+}, 1000);
