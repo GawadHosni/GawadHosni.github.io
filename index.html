@@ -59,8 +59,7 @@
     <!-- الهيدر -->
     <header>
             <img src="schoollogo.jpg" alt="شعار مدرسة جواد حسني" class="school-logo" class="lazy-load">
-            <h1 style="color: white;">مدرسة جواد حسني الرسمية لغات</h1>
-            <br>
+            <h1 style="color: white; margin-bottom: 0.6rem;">مدرسة جواد حسني الرسمية لغات</h1>
     </header>
     
     
@@ -74,10 +73,9 @@
             <a href="#gallery">المعرض</a>
             <a href="#teachers">المعلمين</a>
             <a href="#news">الأخبار</a>
-            <a href="#events">المواعيد</a>
-            <a href="#students">المتفوقون</a>
-            <a href="#discipline">المشاغبين</a>
             <a href="#achievements">الإنجازات</a>
+            <a href="#events">المواعيد</a>
+            <a href="#books">الكتب</a>
             <a href="#curriculum">النتائج</a>
             <a href="#admission">التسجيل</a>
             <a href="#fees">الرسوم</a>
@@ -90,7 +88,7 @@
     <main>
         <!-- قسم من نحن -->
 <section id="about" class="fade-in">
-    <br><br>
+    <br>
     <h2 class="section-title">عن المدرسة</h2>
     
     <div class="about-box">
@@ -136,7 +134,6 @@
 
         <!-- قسم المعرض -->
         <section id="gallery" class="fade-in">
-            <br>
             <br>
             <h2 class="section-title">معرض الصور والفيديوهات</h2>
             <div class="grid-container">
@@ -186,7 +183,7 @@
 
         <!-- قسم المعلمين حسب المادة -->
 <section id="teachers" class="fade-in">
-  <br><br>
+  <br>
   <h2 class="section-title">المعلمون حسب المواد</h2>
   <div class="subjects-container">
     <div class="subject">
@@ -433,7 +430,7 @@
 
  <!-- قسم الأخبار -->
 <section id="news" class="fade-in">
-  <br><br>
+  <br>
   <h2 class="section-title">أخبار المدرسة</h2>
 
   <!-- زر تحديث الأخبار -->
@@ -559,51 +556,9 @@
   document.getElementById('refresh-news-btn').addEventListener('click', () => fetchNews());
 </script>
 
-
-
-
-
-
-
-        
-        <!-- قسم المواعيد الهامة -->
-<section id="events" class="fade-in">
-            <br>
-            <h2 class="section-title">العد التنازلي لبداية العام الدراسي</h2>
- <section id="countdown" class="important-dates">
-  <div id="timer" class="timer-box">
-    <div><span id="seconds">00</span><p>ثانية</p></div>
-    <div><span id="minutes">00</span><p>دقيقة</p></div>
-    <div><span id="hours">00</span><p>ساعة</p></div>
-    <div><span id="days">00</span><p>يوم</p></div>
-  </div>
-  <div id="message" class="message"></div>
- </section>
-</section>
-
-        <!-- قسم الطلاب المتفوقون -->
-        <section id="students" class="fade-in">
-            <br>
-            <br>
-            <h2 class="section-title">الطلاب المتفوقون</h2>
-            <div style="text-align:center;">
-              <h3>سيتم نشر صور المتفوقين خلال العام الدراسي الجديد</h3>
-              <p style="margin-top:1rem;">نفخر في مدرستنا بالطلاب المتفوقين الذين يمثلون نموذجًا للجد والاجتهاد. يتم تكريم المتفوقين اسبوعيا في الطابور المدرسي ومن خلال نشر أسمائهم في هذا القسم.</p>
-            </div>
-        </section>
-        <!-- قسم الطلاب المشاغبين -->
-        <section id="discipline" class="fade-in">
-    <br><br>
-    <h2 class="section-title">قسم المشاغبين</h2>
-    <h3 style="text-align:center; margin-bottom: 20px;">سيتم نشر اسماء الطلاب المشاغبين خلال العام الدراسي الجديد</h3>
-    <p style="text-align:center; margin-bottom: 20px;">يُستخدم هذا القسم لتوثيق أسماء الطلاب المخالفين، وفصولهم، والعقوبات المقررة عليهم.</p>
-
-
-</section>
-
         <!-- قسم الإنجازات -->
 <section id="achievements" class="fade-in">
-  <br><br>
+  <br>
   <h2 class="section-title">الإنجازات خلال فترة الصيف و العام الدراسي 2025/2026</h2>
 
   <div class="grid-container achievements-grid">
@@ -629,9 +584,33 @@
   </div>
 </section>
 
+        <!-- قسم المواعيد الهامة -->
+<section id="events" class="fade-in">
+            <br>
+            <h2 class="section-title">العد التنازلي لبداية العام الدراسي</h2>
+ <section id="countdown" class="important-dates">
+  <div id="timer" class="timer-box">
+    <div><span id="seconds">00</span><p>ثانية</p></div>
+    <div><span id="minutes">00</span><p>دقيقة</p></div>
+    <div><span id="hours">00</span><p>ساعة</p></div>
+    <div><span id="days">00</span><p>يوم</p></div>
+  </div>
+  <div id="message" class="message"></div>
+ </section>
+</section>
+
+        <!-- قسم  الكتب الدراسية -->
+        <section id="books" class="fade-in">
+            <br>
+            <h2 class="section-title"> الكتب المدرسية لجميع الفصول</h2>
+            <div style="text-align:center;">
+              <a href="https://studentbooks.moe.gov.eg/" class="btn">رابط الكتب المدرسية</a>
+              <p style="margin-top: 2rem;">رابط الكتب المدرسية لجميع الفصول (من رياض أطفال الي المرحلة الاعدادية)</p>
+            </div>
+        </section>
 
 <section id="curriculum" class="fade-in">
-  <br><br>
+  <br>
   <div class="container">
     <h2 class="section-title">نتيجة الطلاب للعام الدراسي 2024/2025</h2>
     <div style="text-align:center; padding:2rem;">
@@ -883,8 +862,9 @@ subjectsHtml += '</div>';
 </script>
 
 
-<!-- قسم التسجيل --><section id="admission" class="fade-in">
-    <br><br>
+<!-- قسم التسجيل -->
+<section id="admission" class="fade-in">
+    <br>
     <h2 class="section-title">تقديم الملفات الورقية</h2><div class="admission-instructions" style="line-height: 1.9; padding: 1rem;">
     <h3>الأوراق المطلوبة للتقديم الورقي لرياض الأطفال والصف الأول الابتدائي للعام الدراسي 2025 / 2026</h3>
     <ul>
@@ -949,7 +929,7 @@ subjectsHtml += '</div>';
         
         <!-- قسم الرسوم -->
 <section id="fees" class="fade-in">
-    <br><br>
+    <br>
     <h2 class="section-title">الرسوم المدرسية</h2>
 
     <!-- الشروط -->
@@ -1033,7 +1013,6 @@ subjectsHtml += '</div>';
         <!-- قسم اتصل بنا -->
         <section id="contact" class="fade-in">
             <br>
-            <br>
             <h2 class="section-title">اتصل بنا</h2>
             <div class="grid-container">
                 <div class="card">
@@ -1068,19 +1047,18 @@ subjectsHtml += '</div>';
                     <a href="#achievements">الإنجازات</a>
                     <a href="#gallery">المعرض</a>
                     <a href="#teachers">المعلمون</a>
-                    <a href="#students">المتفوقون</a>
-                    <a href="#discipline">المشاغبين</a>
+                    <a href="#news">الأخبار</a>
                 </div>
                 
                 <div>
                     <h3>الخدمات</h3>
                     <a href="#admission">التسجيل</a>
-                    <a href="#fees">الرسوم المدرسية</a>
+                    <a href="#fees">المصاريف المدرسية</a>
                 </div>
                 
                 <div>
                     <h3>روابط سريعة</h3>
-                    <a href="#news">الأخبار</a>
+                    <a href="#books">الكتب المدرسية</a>
                     <a href="#events">المواعيد</a>
                     <a href="#curriculum">النتائج</a>
                     <a href="#contact">اتصل بنا</a>
