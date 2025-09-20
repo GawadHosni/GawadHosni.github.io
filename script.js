@@ -123,30 +123,116 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-// التاريخ المستهدف
-var countDownDate = new Date("Sep 20, 2025 07:00:00").getTime();
+  const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
 
-// تحديث العداد كل ثانية
-var x = setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
+  function parseCSV(content) {
+    const rows = [];
+    const lines = content.split('\n');
+    let currentRow = '';
+    let insideQuotes = false;
 
-  // حساب الأيام والساعات والدقائق والثواني
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    for (let line of lines) {
+      if (!insideQuotes) {
+        currentRow = line;
+      } else {
+        currentRow += '\n' + line;
+      }
 
-  // عرض النتائج
-  document.getElementById("days").innerHTML = days;
-  document.getElementById("hours").innerHTML = hours;
-  document.getElementById("minutes").innerHTML = minutes;
-  document.getElementById("seconds").innerHTML = seconds;
+      const quoteCount = (currentRow.match(/"/g) || []).length;
+      insideQuotes = quoteCount % 2 !== 0;
 
-  // لما يخلص العداد
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("timer").style.display = "none";
-    document.getElementById("message").innerHTML = "🎉 بداية العام الدراسي الجديد 2025/2026";
+      if (!insideQuotes) {
+        rows.push(parseCSVLine(currentRow));
+      }
+    }
+    return rows;
   }
-}, 1000);
+
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current.trim().replace(/^"|"$/g, ''));
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current.trim().replace(/^"|"$/g, ''));
+    return result;
+  }
+
+  function fetchNews(limit = 4) {
+    const csvUrl = baseCsvUrl + '&cacheBuster=' + new Date().getTime();
+    fetch(csvUrl)
+      .then(response => response.text())
+      .then(text => {
+        const lines = parseCSV(text.trim());
+        const container = document.getElementById('news-container');
+        container.innerHTML = '';
+
+        const newsItems = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i];
+          const date = cols[1] || '';
+          const title = cols[2] || '';
+          const description = cols[3] || '';
+          const link = cols[4] || '';
+
+          if (title.trim() && description.trim()) {
+            newsItems.push({ date, title, description, link });
+          }
+        }
+
+        newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (newsItems.length === 0) {
+          container.innerHTML = '<p style="text-align: center;">لا توجد أخبار حالياً.</p>';
+          return;
+        }
+
+        const itemsToShow = limit ? newsItems.slice(0, limit) : newsItems;
+
+        itemsToShow.forEach(({ date, title, description, link }) => {
+          const newsItem = document.createElement('div');
+          newsItem.classList.add('news-item');
+
+          const linkHtml = link.trim()
+            ? `<a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>`
+            : '';
+
+          newsItem.innerHTML = `
+            <div class="news-date">${date}</div>
+            <h3>${title}</h3>
+            <p>${description.replace(/\n/g, '<br>')}</p>
+            ${linkHtml}
+          `;
+          container.appendChild(newsItem);
+        });
+
+        // زر "عرض جميع الأخبار"
+        if (limit && newsItems.length > limit) {
+          const moreBtn = document.createElement('div');
+          moreBtn.innerHTML = `
+            <div style="text-align:center; margin-top: 1rem;">
+              <a href="all-news.html" class="refresh-news-btn">عرض جميع الأخبار</a>
+            </div>
+          `;
+          container.appendChild(moreBtn);
+        }
+      })
+      .catch(err => {
+        console.error('خطأ في تحميل الأخبار:', err);
+        document.getElementById('news-container').innerText = 'فشل في تحميل الأخبار.';
+      });
+  }
+
+  fetchNews();
+  document.getElementById('refresh-news-btn').addEventListener('click', () => fetchNews());
