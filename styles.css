@@ -289,7 +289,7 @@ footer {
 }
 
 /* تحسينات عامة للجوال */
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
     body {
         font-size: 14px;
     }
@@ -347,7 +347,7 @@ footer {
 }
 
 /* تحسينات للشاشات الصغيرة جدًا */
-@media (max-width: 480px) {
+@media (max-width: 700px) {
     /* إخفاء بعض العناصر غير الضرورية في الجوال */
     .back-to-top {
         width: 30px;
@@ -471,7 +471,7 @@ a, button, input, .btn {
   z-index: 1002; /* أعلى من nav-container */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
     .mobile-menu-btn {
         display: block;
     }
@@ -617,7 +617,7 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
   object-fit: cover;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1080px) {
   .achievement-card .card-img {
     height: 120px;
   }
@@ -703,7 +703,7 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
   border-radius: 3px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .subjects-container {
     gap: 1rem;
     padding: 1rem;
@@ -799,7 +799,7 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
     color: #666;
     margin-bottom: 0.3rem;
 }
-@media (min-width: 1081px) {
+@media (min-width: 1080px) { 
   .nav-container {
     flex-wrap: nowrap; /* 🛠 تمنع العناصر من الانتقال لسطر جديد */
   }
