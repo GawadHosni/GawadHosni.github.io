@@ -51,49 +51,49 @@ header {
     margin-right: auto; /* وهذه الإضافة لتوسيط الصورة */
 }
 
-/* إزالة أي توجيه نصي قد يؤثر على الصورة */
-
-
 /* شريط التنقل */
 nav {
     background-color: var(--primary-color);
     padding: 0.5rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1001;
+    position: relative;
+    z-index: 1000;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 1rem;
-    font-family: "Tajawal", sans-serif;
+    position: relative;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
+.nav-container a {
+    display: block;
     padding: 0.5rem 1rem;
-    margin: 0 0.3rem;
-    font-weight: 500;
+    margin: 0.5rem;
+    color: white;
+    text-align: center;
+    font-size: 14px;
     border-radius: 4px;
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 
-nav a:hover{
-    background-color: rgba(255, 255, 255, 0.2);
+.nav-container a:hover {
+    background-color: rgba(255,255,255,0.2);
     color: var(--accent-color);
 }
-
 /* الأقسام الرئيسية */
 section {
     background: white;
     margin: 1.5rem auto;
     padding: 1.5rem;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     max-width: 1200px;
 }
@@ -185,16 +185,15 @@ section {
     width: 100%;
 }
 
-/* قسم الأخبار */
-
-
+/* الاخبار */
 .news-date {
     font-size: 0.85rem;
     color: #666;
     margin-bottom: 0.3rem;
 }
-
-/* قسم المواعيد الهامة */
+.news-item {
+    margin-bottom: 15px;
+}
 
 /* الفوتر */
 footer {
@@ -251,11 +250,6 @@ footer {
     opacity: 1;
     visibility: visible;
 }
-
-.news-item{
-    margin-bottom: 1.5rem;
-}
-
 
 /* خريطة الموقع */
 .sitemap {
@@ -489,9 +483,6 @@ header {
     transition: all 0.3s ease;
 }
 
-/* عند التمرير */
-
-
 /* تحسين الشعار للشاشات الصغيرة جدًا */
 @media (max-width: 400px) {
     .school-logo {
@@ -535,7 +526,6 @@ section:nth-child(odd) {
     width: 100%;
     max-height: 0;
     opacity: 0;
-    overflow: hidden;
     padding: 0;
     transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
     position: absolute;
@@ -565,6 +555,12 @@ section:nth-child(odd) {
     border-radius: 8px;
     background-color: rgba(255,255,255,0.05);
     transition: background 0.3s ease;
+  }
+  .nav-container.active {
+    max-height: 500px; /* أو قيمة مناسبة حسب عدد الروابط */
+    opacity: 1;
+    padding: 0.5rem 1rem;
+    pointer-events: auto;
   }
 }
 /* إصلاح مشكلة الطبقات */
@@ -675,7 +671,6 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
   overflow-y: auto;
 }
 
-/* شيلنا subject:hover .teacher-list نهائيًا */
 
 .teacher-list p {
   margin: 0.5rem 0;
@@ -814,7 +809,6 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
   }
 }
 
-
 .text{
     background-color: rgb(255, 0, 0);
     height: 25px;
@@ -898,3 +892,5 @@ box-shadow: 0 3px 7px rgba(37, 117, 252, 0.8);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
+
+ 

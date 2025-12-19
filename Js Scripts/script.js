@@ -283,3 +283,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
   fetchNews();
   document.getElementById('refresh-news-btn').addEventListener('click', () => fetchNews());
+
