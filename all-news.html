@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VRJJTEX7XW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VRJJTEX7XW');
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>مدرسة جواد حسني الرسمية لغات</title>
+    <link rel="website icon" href="Images/schoollogo.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    
+    <!-- تحسينات SEO -->
+    <meta name="description" content="مدرسة جواد حسني الرسمية لغات - مؤسسة تعليمية مميزة تقدم تعليمًا بجودة عالية من رياض الأطفال حتى الإعدادية">
+    <meta name="keywords" content="مدرسة جواد حسني, مدارس الجيزة, التعليم الأساسي, مدرسة لغات, مترو السودان, جواد حسني, مدرسة جواد حسني للغات,موقع مدرسة جواد حسني,جواد حسني">
+    <meta name="author" content="مدرسة جواد حسني">
+    <link rel="canonical" href="https://gawadhosni.github.io" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gawadhosni.github.io/">
+    <meta property="og:title" content="مدرسة جواد حسني الرسمية لغات">
+    <meta property="og:description" content="مدرسة تعليمية مميزة في الجيزة تقدم تعليمًا متميزًا">
+    <meta property="og:image" content="https://gawadhosni.github.io/schoollogo.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://gawadhosni.github.io/">
+    <meta property="twitter:title" content="مدرسة جواد حسني الرسمية لغات">
+    <meta property="twitter:description" content="مدرسة تعليمية مميزة في الجيزة تقدم تعليمًا متميزًا">
+    <meta property="twitter:image" content="https://gawadhosni.github.io/schoollogo.jpg">
+
+    <!-- تحسينات الأمان -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    
+    <!-- خطوط Google -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Tajawal" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Lightbox -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-color: #004080;">
+    <!-- الهيدر -->
+    <header>
+            <img src="Images/schoollogo.jpg" alt="شعار مدرسة جواد حسني" class="school-logo" class="lazy-load">
+            <h1 style="color: white;">مدرسة جواد حسني الرسمية لغات</h1>
+            <br>
+        </div>
+    </header>
+    
+        <!-- شريط التنقل -->
+    <nav>
+       <button class="mobile-menu-btn" aria-label="قائمة التنقل" aria-expanded="false">
+  <i class="fas fa-bars"></i>
+</button>
+        <div class="nav-container">
+            <a href="index.html">العودة الي الصفحة الرئيسية</a>
+
+        </div>
+    </nav>
+    <section id="news" class="fade-in">
+  <br><br>
+  <h2 class="section-title">أخبار المدرسة</h2>
+
+  <!-- زر تحديث الأخبار -->
+  <button class="refresh-news-btn" id="refresh-news-btn">تحديث الأخبار</button>
+  <br><br>
+
+  <div id="news-container"></div>  
+</section>  
+<script>
+  const baseCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRwOZoyuk5k3VMPbpbvShdOf-aJDJIP21xv4dJ36mjNoTaHOjOeC53tb3qlfK-XTToQItA49ELPQUkX/pub?gid=484642957&single=true&output=csv';
+
+  function parseCSV(content) {
+    const rows = [];
+    const lines = content.split('\n');
+    let currentRow = '';
+    let insideQuotes = false;
+
+    for (let line of lines) {
+      if (!insideQuotes) {
+        currentRow = line;
+      } else {
+        currentRow += '\n' + line;
+      }
+
+      const quoteCount = (currentRow.match(/"/g) || []).length;
+      insideQuotes = quoteCount % 2 !== 0;
+
+      if (!insideQuotes) {
+        rows.push(parseCSVLine(currentRow));
+      }
+    }
+    return rows;
+  }
+
+  function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current.trim().replace(/^"|"$/g, ''));
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current.trim().replace(/^"|"$/g, ''));
+    return result;
+  }
+
+  function fetchNews() {
+    const csvUrl = baseCsvUrl + '&cacheBuster=' + new Date().getTime();
+    fetch(csvUrl)
+      .then(response => response.text())
+      .then(text => {
+        const lines = parseCSV(text.trim());
+        const container = document.getElementById('news-container');
+        container.innerHTML = '';
+
+        const newsItems = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i];
+          const date = cols[1] || '';
+          const title = cols[2] || '';
+          const description = cols[3] || '';
+          const link = cols[4] || '';
+
+          if (title.trim() && description.trim()) {
+            newsItems.push({ date, title, description, link });
+          }
+        }
+
+        newsItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        if (newsItems.length === 0) {
+          container.innerHTML = '<p style="text-align: center;">لا توجد أخبار حالياً.</p>';
+          return;
+        }
+
+        newsItems.forEach(({ date, title, description, link }) => {
+          const newsItem = document.createElement('div');
+          newsItem.classList.add('news-item');
+
+          const linkHtml = link.trim()
+            ? `<a href="${link}" class="btn" target="_blank" rel="noopener">قراءة المزيد</a>`
+            : '';
+
+          newsItem.innerHTML = `
+            <div class="news-date">${date}</div>
+            <h3>${title}</h3>
+            <p>${description.replace(/\n/g, '<br>')}</p>
+            ${linkHtml}
+          `;
+          container.appendChild(newsItem);
+        });
+      })
+      .catch(err => {
+        console.error('خطأ في تحميل الأخبار:', err);
+        document.getElementById('news-container').innerText = 'فشل في تحميل الأخبار.';
+      });
+  }
+
+  fetchNews();
+  document.getElementById('refresh-news-btn').addEventListener('click', fetchNews);
+</script>
+</body>
+</html>
