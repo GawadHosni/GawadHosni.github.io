@@ -284,3 +284,10 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchNews();
   document.getElementById('refresh-news-btn').addEventListener('click', () => fetchNews());
 
+window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+    }
+});

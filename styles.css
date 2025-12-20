@@ -246,9 +246,16 @@ footer {
     transition: all 0.3s ease;
     z-index: 999;
 }
-.back-to-top :hover {
+
+/* ظهور الزر عند إضافة الكلاس show */
+.back-to-top.show {
     opacity: 1;
     visibility: visible;
+}
+
+/* تأثير hover */
+.back-to-top:hover {
+    transform: scale(1.1);
 }
 
 /* خريطة الموقع */
@@ -347,7 +354,7 @@ footer {
 }
 
 /* تحسينات للشاشات الصغيرة جدًا */
-@media (max-width: 700px) {
+@media (max-width: 1080px) {
     /* إخفاء بعض العناصر غير الضرورية في الجوال */
     .back-to-top {
         width: 30px;
